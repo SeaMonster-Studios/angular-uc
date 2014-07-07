@@ -5,7 +5,7 @@ require("angular-cookies");
 
 var ucApp = angular.module("ucApp", ["ngRoute", "ngCookies"]);
 
-//require("./controllers/catalogController.js")(ucApp);
+require("./controllers/catalogController.js")(ucApp);
 //require("./controllers/itemController.js")(ucApp);
 require("./controllers/homeController.js")(ucApp);
 

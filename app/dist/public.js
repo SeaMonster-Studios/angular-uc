@@ -23541,7 +23541,7 @@ require("./../../bower_components/angular-cookies/angular-cookies.js");
 
 var ucApp = angular.module("ucApp", ["ngRoute", "ngCookies"]);
 
-//require("./controllers/catalogController.js")(ucApp);
+require("./controllers/catalogController.js")(ucApp);
 //require("./controllers/itemController.js")(ucApp);
 require("./controllers/homeController.js")(ucApp);
 
@@ -23563,8 +23563,33 @@ ucApp.config(["$routeProvider", function($routeProvider) {
             redirectTo: "/"
         });
 }]); // end ucApp.config
-},{"./../../bower_components/angular-cookies/angular-cookies.js":1,"./../../bower_components/angular-resource/angular-resource.js":2,"./../../bower_components/angular-route/angular-route.js":3,"./../../bower_components/angular/angular":4,"./controllers/homeController.js":7}],6:[function(require,module,exports){
+},{"./../../bower_components/angular-cookies/angular-cookies.js":1,"./../../bower_components/angular-resource/angular-resource.js":2,"./../../bower_components/angular-route/angular-route.js":3,"./../../bower_components/angular/angular":4,"./controllers/catalogController.js":6,"./controllers/homeController.js":7}],6:[function(require,module,exports){
+"use strict";
 
+module.exports = function(app) {
+    var baseUrl = app.get("apiBase");
+    var merchantId = "SEAM";
+
+    app.controller("CatalogController", function($scope, $http) {
+
+        $http.Provider.defaults.headers.common = {"cache-control": "no-cache", "X-UC-Merchant-Id": merchantId};
+        $http({
+            method: "GET",
+            url: baseUrl,
+            data: {}
+        })
+        .success(function(cart, status, headers, config) {
+            if(cart && cart.cartId) {
+                window.myCart = cart;
+                $scope.cartDisplay = cart;
+            }
+        })
+        .error(function(cart, status, headers, config) {
+            console.log(cart);
+        });
+
+    }); // end app.controller("ItemController")
+}; // end module.exports
 },{}],7:[function(require,module,exports){
 "use strict";
 
@@ -23574,5 +23599,13 @@ module.exports = function(app) {
     }); // end app.controller("HomeController")
 }; // end module.exports
 },{}],8:[function(require,module,exports){
-module.exports=require(6)
+"use strict";
+
+module.exports = function(app) {
+    app.controller("ItemController", function($scope, $http) {
+        $scope.loadItem = function() {
+
+        }
+    }); // end app.controller("ItemController")
+}; // end module.exports
 },{}]},{},[5,6,7,8]);

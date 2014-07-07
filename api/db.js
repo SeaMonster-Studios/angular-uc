@@ -7,4 +7,4 @@ var fullPath = i_am_using_a_proxy ? pathToProxy + "?_url=/rest/cart" : "/rest/ca
 
 module.exports = {
     url : fullPath
-}
+};
