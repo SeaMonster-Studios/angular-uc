@@ -12,3 +12,4 @@ Built with
  * Handlebars.js
  * Bower
  * SASS
+ * Browserify
