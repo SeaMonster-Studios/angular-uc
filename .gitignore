@@ -1,0 +1,4 @@
+node_modules
+app/bower_components
+.sass-cache
+setup_env.sh
