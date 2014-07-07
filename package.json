@@ -1,6 +1,6 @@
 {
   "name": "sms-ultracart-checkout",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "UltaCart checkout build with AngularJS and NodeJS",
   "author": "SeaMonster Studios",
   "contributors": [
