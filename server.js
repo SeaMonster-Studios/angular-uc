@@ -10,10 +10,12 @@ var app = express();
 
 // configuration ==========================================
 var restUrl = require("./api/db.js");
+var url = restUrl.url;
 
-console.log(restUrl);
+console.log(url);
 app.set("port", process.env.PORT || 8000);
-app.set("apiBase", restUrl.url);
+app.set("apiBase", url);
+
 
 app.use(bodyParser.json());
 app.use(morgan());

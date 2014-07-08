@@ -1,4 +1,5 @@
 node_modules
 app/bower_components
 .sass-cache
+app/dist
 setup_env.sh

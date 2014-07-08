@@ -1,16 +1,21 @@
 "use strict";
+var baseUrl = require("../../../../api/db");
+var baseUrl = baseUrl.url;
+console.log(baseUrl);
 
 module.exports = function(app) {
-    var baseUrl = app.get("apiBase");
+
     var merchantId = "SEAM";
+    console.log("this is the merchant ID: " + merchantId);
 
     app.controller("CatalogController", function($scope, $http) {
 
-        $http.Provider.defaults.headers.common = {"cache-control": "no-cache", "X-UC-Merchant-Id": merchantId};
+        //$http.Provider.defaults.headers.common = {"cache-control": "no-cache", "X-UC-Merchant-Id": merchantId};
         $http({
             method: "GET",
             url: baseUrl,
-            data: {}
+            headers: {"cache-control": "no-cache", "X-UC-Merchant-Id": merchantId},
+            requestType: "json"
         })
         .success(function(cart, status, headers, config) {
             if(cart && cart.cartId) {

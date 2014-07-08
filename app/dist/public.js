@@ -1,4 +1,15 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);throw new Error("Cannot find module '"+o+"'")}var f=n[o]={exports:{}};t[o][0].call(f.exports,function(e){var n=t[o][1][e];return s(n?n:e)},f,f.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
+"use strict";
+
+var merchantId = "SEAM";
+var i_am_using_a_proxy = true;
+var pathToProxy = "http://uc-rest.seamonsterstudios.io/rest_proxy.php";
+var fullPath = i_am_using_a_proxy ? pathToProxy + "?_url=/rest/cart" : "/rest/cart";
+
+module.exports = {
+    url : fullPath
+};
+},{}],2:[function(require,module,exports){
 /**
  * @license AngularJS v1.2.19
  * (c) 2010-2014 Google, Inc. http://angularjs.org
@@ -204,7 +215,7 @@ angular.module('ngCookies', ['ng']).
 
 })(window, window.angular);
 
-},{}],2:[function(require,module,exports){
+},{}],3:[function(require,module,exports){
 /**
  * @license AngularJS v1.2.19
  * (c) 2010-2014 Google, Inc. http://angularjs.org
@@ -825,7 +836,7 @@ angular.module('ngResource', ['ng']).
 
 })(window, window.angular);
 
-},{}],3:[function(require,module,exports){
+},{}],4:[function(require,module,exports){
 /**
  * @license AngularJS v1.2.19
  * (c) 2010-2014 Google, Inc. http://angularjs.org
@@ -1754,7 +1765,7 @@ function ngViewFillContentFactory($compile, $controller, $route) {
 
 })(window, window.angular);
 
-},{}],4:[function(require,module,exports){
+},{}],5:[function(require,module,exports){
 /**
  * @license AngularJS v1.2.19
  * (c) 2010-2014 Google, Inc. http://angularjs.org
@@ -23533,7 +23544,7 @@ var styleDirective = valueFn({
 })(window, document);
 
 !window.angular.$$csp() && window.angular.element(document).find('head').prepend('<style type="text/css">@charset "UTF-8";[ng\\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide{display:none !important;}ng\\:form{display:block;}.ng-animate-block-transitions{transition:0s all!important;-webkit-transition:0s all!important;}.ng-hide-add-active,.ng-hide-remove{display:block!important;}</style>');
-},{}],5:[function(require,module,exports){
+},{}],6:[function(require,module,exports){
 require("./../../bower_components/angular/angular");
 require("./../../bower_components/angular-route/angular-route.js");
 require("./../../bower_components/angular-resource/angular-resource.js");
@@ -23563,20 +23574,25 @@ ucApp.config(["$routeProvider", function($routeProvider) {
             redirectTo: "/"
         });
 }]); // end ucApp.config
-},{"./../../bower_components/angular-cookies/angular-cookies.js":1,"./../../bower_components/angular-resource/angular-resource.js":2,"./../../bower_components/angular-route/angular-route.js":3,"./../../bower_components/angular/angular":4,"./controllers/catalogController.js":6,"./controllers/homeController.js":7}],6:[function(require,module,exports){
+},{"./../../bower_components/angular-cookies/angular-cookies.js":2,"./../../bower_components/angular-resource/angular-resource.js":3,"./../../bower_components/angular-route/angular-route.js":4,"./../../bower_components/angular/angular":5,"./controllers/catalogController.js":7,"./controllers/homeController.js":8}],7:[function(require,module,exports){
 "use strict";
+var baseUrl = require("../../../../api/db");
+var baseUrl = baseUrl.url;
+console.log(baseUrl);
 
 module.exports = function(app) {
-    var baseUrl = app.get("apiBase");
+
     var merchantId = "SEAM";
+    console.log("this is the merchant ID: " + merchantId);
 
     app.controller("CatalogController", function($scope, $http) {
 
-        $http.Provider.defaults.headers.common = {"cache-control": "no-cache", "X-UC-Merchant-Id": merchantId};
+        //$http.Provider.defaults.headers.common = {"cache-control": "no-cache", "X-UC-Merchant-Id": merchantId};
         $http({
             method: "GET",
             url: baseUrl,
-            data: {}
+            headers: {"cache-control": "no-cache", "X-UC-Merchant-Id": merchantId},
+            requestType: "json"
         })
         .success(function(cart, status, headers, config) {
             if(cart && cart.cartId) {
@@ -23590,7 +23606,7 @@ module.exports = function(app) {
 
     }); // end app.controller("ItemController")
 }; // end module.exports
-},{}],7:[function(require,module,exports){
+},{"../../../../api/db":1}],8:[function(require,module,exports){
 "use strict";
 
 module.exports = function(app) {
@@ -23598,7 +23614,7 @@ module.exports = function(app) {
         $scope.message = "Thanks for coming to the Home Page buddy";
     }); // end app.controller("HomeController")
 }; // end module.exports
-},{}],8:[function(require,module,exports){
+},{}],9:[function(require,module,exports){
 "use strict";
 
 module.exports = function(app) {
@@ -23608,4 +23624,4 @@ module.exports = function(app) {
         }
     }); // end app.controller("ItemController")
 }; // end module.exports
-},{}]},{},[5,6,7,8]);
+},{}]},{},[6,7,8,9]);
