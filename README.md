@@ -14,8 +14,8 @@ Built with
  * SASS
  * Browserify
 
- rest_proxy.php
- ====================================
+rest_proxy.php
+====================================
  * Install it in your web server.
  * Test rest_proxy.php.
    Test #1: If you call it directly from the web browser, you should receive back this response: "UltraCart rest proxy script called incorrectly.  _url query parameter is required.
