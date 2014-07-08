@@ -12,10 +12,12 @@ module.exports = function(app) {
 
         //$http.Provider.defaults.headers.common = {"cache-control": "no-cache", "X-UC-Merchant-Id": merchantId};
         $http({
+
+            url: baseUrl + "&_mid=SEAM",
             method: "GET",
-            url: baseUrl,
-            headers: {"cache-control": "no-cache", "X-UC-Merchant-Id": merchantId},
-            requestType: "json"
+            headers: {"cache-control": "no-cache", "_mid": merchantId, "Content-Type":"application/json"},
+            data: '',
+            dataType: "json"
         })
         .success(function(cart, status, headers, config) {
             if(cart && cart.cartId) {
