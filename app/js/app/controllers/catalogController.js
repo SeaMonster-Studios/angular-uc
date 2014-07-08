@@ -1,6 +1,8 @@
 "use strict";
 var baseUrl = require("../../../../api/db");
-var baseUrl = baseUrl.url;
+var cartUrl = baseUrl.cartUrl;
+var itemUrl = baseUrl.itemUrl;
+
 console.log(baseUrl);
 
 module.exports = function(app) {
@@ -9,25 +11,20 @@ module.exports = function(app) {
     console.log("this is the merchant ID: " + merchantId);
 
     app.controller("CatalogController", function($scope, $http) {
+        var item = "SEAM-ITEM-001";
 
-        //$http.Provider.defaults.headers.common = {"cache-control": "no-cache", "X-UC-Merchant-Id": merchantId};
         $http({
-
-            url: baseUrl + "&_mid=SEAM",
+            url: itemUrl + "/" + item + "&_mid=SEAM",
             method: "GET",
-            headers: {"cache-control": "no-cache", "_mid": merchantId, "Content-Type":"application/json"},
-            data: '',
+            headers: {"cache-control": "no-cache", "X-UC-Merchant-Id": "SEAM"},
+            data: {},
             dataType: "json"
         })
-        .success(function(cart, status, headers, config) {
-            if(cart && cart.cartId) {
-                window.myCart = cart;
-                $scope.cartDisplay = cart;
-            }
+        .success(function(data, status, headers, config) {
+            console.log("I worked buddy");
         })
-        .error(function(cart, status, headers, config) {
-            console.log(cart);
+        .error(function(data, status, headers, config) {
+            console.log(data);
         });
-
-    }); // end app.controller("ItemController")
+    });
 }; // end module.exports

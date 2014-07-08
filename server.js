@@ -10,7 +10,7 @@ var app = express();
 
 // configuration ==========================================
 var restUrl = require("./api/db.js");
-var url = restUrl.url;
+var url = restUrl.cartUrl;
 
 console.log(url);
 app.set("port", process.env.PORT || 8000);
