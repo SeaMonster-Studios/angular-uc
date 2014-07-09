@@ -15,7 +15,7 @@ var url = restUrl.cartUrl;
 console.log(url);
 app.set("port", process.env.PORT || 8000);
 app.set("apiBase", url);
-
+app.enable('trust proxy');
 
 app.use(bodyParser.json());
 app.use(morgan());
@@ -29,3 +29,4 @@ var server = http.createServer(app);
 server.listen(app.get("port"), function() {
     console.log("Server is running on " + app.get("port"));
 });
+

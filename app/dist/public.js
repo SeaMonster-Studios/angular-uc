@@ -4,12 +4,15 @@
 var merchantId = "SEAM";
 var i_am_using_a_proxy = true;
 var pathToProxy = "http://uc-rest.seamonsterstudios.io/rest_proxy.php";
+var testPath = "http://localhost:8888/restUC/rest_proxy.php";
 var fullPathCart = i_am_using_a_proxy ? pathToProxy + "?_url=/rest/cart" : "/rest/cart";
 var fullPathItem = i_am_using_a_proxy ? pathToProxy + "?_url=/rest/site/items" : "/rest/site/items";
+var testUrl = i_am_using_a_proxy ? testPath + "?_url=/rest/site/items" : "/rest/site/items";
 
 module.exports = {
     cartUrl : fullPathCart,
-    itemUrl : fullPathItem
+    itemUrl : fullPathItem,
+    testUrl : testUrl
 };
 },{}],2:[function(require,module,exports){
 /**
@@ -23581,6 +23584,7 @@ ucApp.config(["$routeProvider", function($routeProvider) {
 var baseUrl = require("../../../../api/db");
 var cartUrl = baseUrl.cartUrl;
 var itemUrl = baseUrl.itemUrl;
+var testUrl = baseUrl.testUrl;
 
 console.log(baseUrl);
 
@@ -23593,14 +23597,16 @@ module.exports = function(app) {
         var item = "SEAM-ITEM-001";
 
         $http({
-            url: itemUrl + "/" + item + "&_mid=SEAM",
+            //url: itemUrl + "/" + item + "&_mid=SEAM",
+            url: testUrl + "/SEAM-ITEM-001&_mid=SEAM",
             method: "GET",
-            headers: {"cache-control": "no-cache", "X-UC-Merchant-Id": "SEAM"},
+            //headers: {"cache-control": "no-cache", "X-UC-Merchant-Id": "SEAM"},
             data: {},
             dataType: "json"
         })
         .success(function(data, status, headers, config) {
-            console.log("I worked buddy");
+            $scope.cartDisplay = data;
+            console.log(data);
         })
         .error(function(data, status, headers, config) {
             console.log(data);
