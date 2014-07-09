@@ -29,3 +29,7 @@ rest_proxy.php
    rest_proxy.php?_url=/rest/cart&_mid=DEMO
 ```
    you should receive back the json for an empty cart.
+
+Issues and Bugs
+======================================
+Current development issues and problems that I am trying to solve will be tracked as issues in the repo. For a list of what the current sticking points are, just check the open issues.
