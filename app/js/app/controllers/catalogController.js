@@ -15,7 +15,6 @@ module.exports = function(app) {
         var item = "SEAM-ITEM-001";
 
         $http({
-            //url: itemUrl + "/" + item + "&_mid=SEAM",
             url: testUrl + "/SEAM-ITEM-001&_mid=SEAM",
             method: "GET",
             //headers: {"cache-control": "no-cache", "X-UC-Merchant-Id": "SEAM"},
@@ -24,7 +23,7 @@ module.exports = function(app) {
         })
         .success(function(data, status, headers, config) {
             $scope.cartDisplay = data;
-            console.log(data);
+            //console.log(data);
         })
         .error(function(data, status, headers, config) {
             console.log(data);

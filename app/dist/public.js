@@ -4,7 +4,7 @@
 var merchantId = "SEAM";
 var i_am_using_a_proxy = true;
 var pathToProxy = "http://uc-rest.seamonsterstudios.io/rest_proxy.php";
-var testPath = "http://localhost:8888/restUC/rest_proxy.php";
+var testPath = "http://localhost:8888/restUCTest/rest_proxy.php";
 var fullPathCart = i_am_using_a_proxy ? pathToProxy + "?_url=/rest/cart" : "/rest/cart";
 var fullPathItem = i_am_using_a_proxy ? pathToProxy + "?_url=/rest/site/items" : "/rest/site/items";
 var testUrl = i_am_using_a_proxy ? testPath + "?_url=/rest/site/items" : "/rest/site/items";
@@ -23597,7 +23597,6 @@ module.exports = function(app) {
         var item = "SEAM-ITEM-001";
 
         $http({
-            //url: itemUrl + "/" + item + "&_mid=SEAM",
             url: testUrl + "/SEAM-ITEM-001&_mid=SEAM",
             method: "GET",
             //headers: {"cache-control": "no-cache", "X-UC-Merchant-Id": "SEAM"},
@@ -23606,7 +23605,7 @@ module.exports = function(app) {
         })
         .success(function(data, status, headers, config) {
             $scope.cartDisplay = data;
-            console.log(data);
+            //console.log(data);
         })
         .error(function(data, status, headers, config) {
             console.log(data);

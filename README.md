@@ -17,6 +17,17 @@ Built with
 rest_proxy.php
 ====================================
  * Install it on your web server.
+ * Make sure that the rest_proxy.php file is on the same domain as the app (see issues for further explanation).
+ * Add the following to the .htaccess file
+`````````
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^ index.php [QSA,L]
+
+Header add Access-Control-Allow-Origin "*"
+Header add Access-Control-Allow-Headers "*"
+Header add Access-Control-Allow-Methods "PUT, GET, POST, DELETE, OPTIONS"
+``````````````
  * Test rest_proxy.php.
    Test #1: If you call it directly from the web browser, you should receive back this response: "UltraCart rest proxy script called incorrectly.  _url query parameter is required.
    Test #2:  adjust your url to call this:
