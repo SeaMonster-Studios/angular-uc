@@ -1,4 +1,8 @@
 <section data-ng-controller="CatalogController">
     <h2>This is the catalog.html view</h2>
-    <p>{{cartDisplay}}</p>
+    <ul>
+        <li data-ng-repeat="item in catalogDisplay">
+            {{item.description}}
+        </li>
+    </ul>
 </section>

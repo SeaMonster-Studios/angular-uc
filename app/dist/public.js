@@ -3,16 +3,19 @@
 
 var merchantId = "SEAM";
 var i_am_using_a_proxy = true;
-var pathToProxy = "http://uc-rest.seamonsterstudios.io/rest_proxy.php";
-var testPath = "http://localhost:8888/restUCTest/rest_proxy.php";
+var pathToProxy = "http://localhost:8888/restUCTest/rest_proxy.php";
+var pathToCatalogUrl = "https://secure.ultracart.com/catalog/SEAM/"
+
 var fullPathCart = i_am_using_a_proxy ? pathToProxy + "?_url=/rest/cart" : "/rest/cart";
 var fullPathItem = i_am_using_a_proxy ? pathToProxy + "?_url=/rest/site/items" : "/rest/site/items";
-var testUrl = i_am_using_a_proxy ? testPath + "?_url=/rest/site/items" : "/rest/site/items";
+
+var catalogPath = i_am_using_a_proxy ? pathToProxy + "?_url=/rest/site/items" : "/rest/site/items";
+var fullPathCatalog = catalogPath + "&_mid=" + merchantId + "&url=" + pathToCatalogUrl;
 
 module.exports = {
     cartUrl : fullPathCart,
     itemUrl : fullPathItem,
-    testUrl : testUrl
+    catalogUrl : fullPathCatalog
 };
 },{}],2:[function(require,module,exports){
 /**
@@ -23584,31 +23587,24 @@ ucApp.config(["$routeProvider", function($routeProvider) {
 var baseUrl = require("../../../../api/db");
 var cartUrl = baseUrl.cartUrl;
 var itemUrl = baseUrl.itemUrl;
-var testUrl = baseUrl.testUrl;
+var catalogUrl = baseUrl.catalogUrl;
 
-console.log(baseUrl);
+
+console.log(catalogUrl);
 
 module.exports = function(app) {
 
-    var merchantId = "SEAM";
-    console.log("this is the merchant ID: " + merchantId);
-
     app.controller("CatalogController", function($scope, $http) {
-        var item = "SEAM-ITEM-001";
-
         $http({
-            url: testUrl + "/SEAM-ITEM-001&_mid=SEAM",
+            url: catalogUrl,
             method: "GET",
-            //headers: {"cache-control": "no-cache", "X-UC-Merchant-Id": "SEAM"},
-            data: {},
             dataType: "json"
         })
         .success(function(data, status, headers, config) {
-            $scope.cartDisplay = data;
-            //console.log(data);
+            $scope.catalogDisplay = data;
         })
         .error(function(data, status, headers, config) {
-            console.log(data);
+            console.log("There was an error: " + data);
         });
     });
 }; // end module.exports

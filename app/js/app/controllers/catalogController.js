@@ -2,31 +2,24 @@
 var baseUrl = require("../../../../api/db");
 var cartUrl = baseUrl.cartUrl;
 var itemUrl = baseUrl.itemUrl;
-var testUrl = baseUrl.testUrl;
+var catalogUrl = baseUrl.catalogUrl;
 
-console.log(baseUrl);
+
+console.log(catalogUrl);
 
 module.exports = function(app) {
 
-    var merchantId = "SEAM";
-    console.log("this is the merchant ID: " + merchantId);
-
     app.controller("CatalogController", function($scope, $http) {
-        var item = "SEAM-ITEM-001";
-
         $http({
-            url: testUrl + "/SEAM-ITEM-001&_mid=SEAM",
+            url: catalogUrl,
             method: "GET",
-            //headers: {"cache-control": "no-cache", "X-UC-Merchant-Id": "SEAM"},
-            data: {},
             dataType: "json"
         })
         .success(function(data, status, headers, config) {
-            $scope.cartDisplay = data;
-            //console.log(data);
+            $scope.catalogDisplay = data;
         })
         .error(function(data, status, headers, config) {
-            console.log(data);
+            console.log("There was an error: " + data);
         });
     });
 }; // end module.exports

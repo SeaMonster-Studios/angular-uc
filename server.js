@@ -1,16 +1,16 @@
 // modules ================================================
-var express = require("express");
-var http = require("http");
-var bodyParser = require("body-parser");
-var morgan = require("morgan");
+var express      = require("express");
+var http         = require("http");
+var bodyParser   = require("body-parser");
+var morgan       = require("morgan");
 var cookieParser = require("cookie-parser");
-var session = require("express-session");
+var session      = require("express-session");
 
 var app = express();
 
 // configuration ==========================================
 var restUrl = require("./api/db.js");
-var url = restUrl.cartUrl;
+var url     = restUrl.cartUrl;
 
 console.log(url);
 app.set("port", process.env.PORT || 8000);

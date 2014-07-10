@@ -1,0 +1,87 @@
+{
+    "length":
+    {
+        "value":12,
+        "uom":"IN"
+    },
+    "attributes":
+    [
+        {
+            "name":"attribute01",
+            "value":"Fringilla Nibh Purus",
+            "type":null
+        },
+        {
+            "name":"attribute02",
+            "value":"Fermentum Ultricies Quam Sit Tortor",
+            "type":null
+        },
+        {
+            "name":"attribute03",
+            "value":"Curabitur blandit tempus porttitor. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit.",
+            "type":null
+        }
+    ],
+    "description":"Sample Item #1",
+    "weight":null,
+    "options":[],
+    "height":
+    {
+        "value":5,
+        "uom":"IN"
+    },
+    "width":
+    {
+        "value":3,
+        "uom":"IN"
+    },
+    "cost":3.95,
+    "variations":[],
+    "inactive":false,
+    "preorder":false,
+    "extendedDescription":"Donec id elit non mi porta gravida at eget metus. Donec sed odio dui.",
+    "maximumQuantity":null,
+    "itemId":"SEAM-ITEM-001",
+    "cases":[],
+    "minimumQuantity":1,
+    "manufacturerSuggestedRetailPrice":null,
+    "multimedias":
+    [
+        {
+            "type":"Image",
+            "description":"",
+            "default":true,
+            "code":null,
+            "imageWidth":1680,
+            "imageHeight":1050,
+            "excludeFromGallery":false,
+            "viewUrl":"http://s3.amazonaws.com/ultracart/im/SEAM/DB6F36A2917D1301470F49CC46051500?AWSAccessKeyId=0P4TXH5AKGYC8WHDZFG2&Expires=1405018359&Signature=6GJoim%2BNV8Be%2FhPPybCT%2F9CWyAw%3D",
+            "thumbnails":
+            [
+                {
+                    "height":80,
+                    "width":80,
+                    "httpsUrl":"https://s3.amazonaws.com/ultracartthumbs/1404710939876/SEAM/F/8/80-80-F884CA04974A7CF76A199765304D6AC7.jpg",
+                    "httpUrl":"http://ultracartthumbs.s3.amazonaws.com/1404710939876/SEAM/F/8/80-80-F884CA04974A7CF76A199765304D6AC7.jpg"
+                },
+                {
+                    "height":200,
+                    "width":200,
+                    "httpsUrl":"https://s3.amazonaws.com/ultracartthumbs/1404710940166/SEAM/F/8/200-200-F884CA04974A7CF76A199765304D6AC7.jpg",
+                    "httpUrl":"http://ultracartthumbs.s3.amazonaws.com/1404710940166/SEAM/F/8/200-200-F884CA04974A7CF76A199765304D6AC7.jpg"
+                }
+            ],
+            "viewSsl":"https://s3.amazonaws.com/ultracart/im/SEAM/DB6F36A2917D1301470F49CC46051500?AWSAccessKeyId=0P4TXH5AKGYC8WHDZFG2&Expires=1405018359&Signature=6GJoim%2BNV8Be%2FhPPybCT%2F9CWyAw%3D"
+        }
+    ],
+    "itemOid":4740641,
+    "viewUrl":null,
+    "availableQuantity":0,
+    "allowBackorder":false,
+    "inventoryTracked":false,
+    "defaultImageUrl":"http://s3.amazonaws.com/ultracart/im/SEAM/DB6F36A2917D1301470F49CC46051500?AWSAccessKeyId=0P4TXH5AKGYC8WHDZFG2&Expires=1405018359&Signature=6GJoim%2BNV8Be%2FhPPybCT%2F9CWyAw%3D",
+    "defaultThumbnailUrl":"1404710939876/SEAM/F/8/80-80-F884CA04974A7CF76A199765304D6AC7.jpg",
+    "inStock":true,
+    "defaultImageSsl":"//s3.amazonaws.com/ultracart/im/SEAM/DB6F36A2917D1301470F49CC46051500?AWSAccessKeyId=0P4TXH5AKGYC8WHDZFG2&Expires=1405018359&Signature=6GJoim%2BNV8Be%2FhPPybCT%2F9CWyAw%3D",
+    "defaultThumbnailSsl":"1404710939876/SEAM/F/8/80-80-F884CA04974A7CF76A199765304D6AC7.jpg"
+}
