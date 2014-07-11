@@ -20,7 +20,8 @@
     "angular-loader": "~1.2.19",
     "angular-base64": "~2.0.2",
     "angular-resource": "~1.2.19",
-    "angular-cookies": "~1.2.19"
+    "angular-cookies": "~1.2.19",
+    "angular-cookie": "~4.0.2"
   },
   "devDependencies": {
     "mocha": "~1.20.1",

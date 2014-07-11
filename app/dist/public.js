@@ -6,8 +6,8 @@ var i_am_using_a_proxy = true;
 var pathToProxy = "http://localhost:8888/restUCTest/rest_proxy.php";
 var pathToCatalogUrl = "https://secure.ultracart.com/catalog/SEAM/"
 
-var fullPathCart = i_am_using_a_proxy ? pathToProxy + "?_url=/rest/cart" : "/rest/cart";
-var fullPathItem = i_am_using_a_proxy ? pathToProxy + "?_url=/rest/site/items" : "/rest/site/items";
+var fullPathCart = i_am_using_a_proxy ? pathToProxy + "?_url=/rest/cart/" : "/rest/cart/";
+var fullPathItem = i_am_using_a_proxy ? pathToProxy + "?_url=/rest/site/items/" : "/rest/site/items/";
 
 var catalogPath = i_am_using_a_proxy ? pathToProxy + "?_url=/rest/site/items" : "/rest/site/items";
 var fullPathCatalog = catalogPath + "&_mid=" + merchantId + "&url=" + pathToCatalogUrl;
@@ -15,9 +15,123 @@ var fullPathCatalog = catalogPath + "&_mid=" + merchantId + "&url=" + pathToCata
 module.exports = {
     cartUrl : fullPathCart,
     itemUrl : fullPathItem,
-    catalogUrl : fullPathCatalog
+    catalogUrl : fullPathCatalog,
+    merchantId : merchantId
 };
 },{}],2:[function(require,module,exports){
+/*
+ * Copyright 2013 Ivan Pusic
+ * Contributors:
+ *   Matjaz Lipus
+ */
+angular.module('ivpusic.cookie', ['ipCookie']);
+angular.module('ipCookie', ['ng']).
+factory('ipCookie', ['$document',
+  function ($document) {
+    'use strict';
+
+    return (function () {
+      function cookieFun(key, value, options) {
+
+        var cookies,
+          list,
+          i,
+          cookie,
+          pos,
+          name,
+          hasCookies,
+          all,
+          expiresFor;
+
+        options = options || {};
+
+        if (value !== undefined) {
+          // we are setting value
+          value = typeof value === 'object' ? JSON.stringify(value) : String(value);
+
+          if (typeof options.expires === 'number') {
+            expiresFor = options.expires;
+            options.expires = new Date();
+            // Trying to delete a cookie; set a date far in the past
+            if (expiresFor === -1) {
+              options.expires = new Date('Thu, 01 Jan 1970 00:00:00 GMT');
+              // A new 
+            } else if (options.expirationUnit !== undefined) {
+              if (options.expirationUnit === 'hours') {
+                options.expires.setHours(options.expires.getHours() + expiresFor);
+              } else if (options.expirationUnit === 'minutes') {
+                options.expires.setMinutes(options.expires.getMinutes() + expiresFor);
+              } else if (options.expirationUnit === 'seconds') {
+                options.expires.setSeconds(options.expires.getSeconds() + expiresFor);
+              } else {
+                options.expires.setDate(options.expires.getDate() + expiresFor);
+              }
+            } else {
+              options.expires.setDate(options.expires.getDate() + expiresFor);
+            }
+          }
+          return ($document[0].cookie = [
+            encodeURIComponent(key),
+            '=',
+            encodeURIComponent(value),
+            options.expires ? '; expires=' + options.expires.toUTCString() : '',
+            options.path ? '; path=' + options.path : '',
+            options.domain ? '; domain=' + options.domain : '',
+            options.secure ? '; secure' : ''
+          ].join(''));
+        }
+
+        list = [];
+        all = $document[0].cookie;
+        if (all) {
+          list = all.split('; ');
+        }
+
+        cookies = {};
+        hasCookies = false;
+
+        for (i = 0; i < list.length; ++i) {
+          if (list[i]) {
+            cookie = list[i];
+            pos = cookie.indexOf('=');
+            name = cookie.substring(0, pos);
+            value = decodeURIComponent(cookie.substring(pos + 1));
+
+            if (key === undefined || key === name) {
+              try {
+                cookies[name] = JSON.parse(value);
+              } catch (e) {
+                cookies[name] = value;
+              }
+              if (key === name) {
+                return cookies[name];
+              }
+              hasCookies = true;
+            }
+          }
+        }
+        if (hasCookies && key === undefined) {
+          return cookies;
+        }
+      }
+      cookieFun.remove = function (key, options) {
+        var hasCookie = cookieFun(key) !== undefined;
+
+        if (hasCookie) {
+          if (!options) {
+            options = {};
+          }
+          options.expires = -1;
+          cookieFun(key, '', options);
+        }
+        return hasCookie;
+      };
+      return cookieFun;
+    }());
+  }
+]);
+
+},{}],3:[function(require,module,exports){
 /**
  * @license AngularJS v1.2.19
  * (c) 2010-2014 Google, Inc. http://angularjs.org
@@ -223,7 +337,7 @@ angular.module('ngCookies', ['ng']).
 
 })(window, window.angular);
 
-},{}],3:[function(require,module,exports){
+},{}],4:[function(require,module,exports){
 /**
  * @license AngularJS v1.2.19
  * (c) 2010-2014 Google, Inc. http://angularjs.org
@@ -844,7 +958,7 @@ angular.module('ngResource', ['ng']).
 
 })(window, window.angular);
 
-},{}],4:[function(require,module,exports){
+},{}],5:[function(require,module,exports){
 /**
  * @license AngularJS v1.2.19
  * (c) 2010-2014 Google, Inc. http://angularjs.org
@@ -1773,7 +1887,7 @@ function ngViewFillContentFactory($compile, $controller, $route) {
 
 })(window, window.angular);
 
-},{}],5:[function(require,module,exports){
+},{}],6:[function(require,module,exports){
 /**
  * @license AngularJS v1.2.19
  * (c) 2010-2014 Google, Inc. http://angularjs.org
@@ -23552,17 +23666,19 @@ var styleDirective = valueFn({
 })(window, document);
 
 !window.angular.$$csp() && window.angular.element(document).find('head').prepend('<style type="text/css">@charset "UTF-8";[ng\\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide{display:none !important;}ng\\:form{display:block;}.ng-animate-block-transitions{transition:0s all!important;-webkit-transition:0s all!important;}.ng-hide-add-active,.ng-hide-remove{display:block!important;}</style>');
-},{}],6:[function(require,module,exports){
+},{}],7:[function(require,module,exports){
 require("./../../bower_components/angular/angular");
 require("./../../bower_components/angular-route/angular-route.js");
 require("./../../bower_components/angular-resource/angular-resource.js");
 require("./../../bower_components/angular-cookies/angular-cookies.js");
+require("./../../bower_components/angular-cookie/angular-cookie.js");
 
-var ucApp = angular.module("ucApp", ["ngRoute", "ngCookies"]);
+var ucApp = angular.module("ucApp", ["ngRoute", "ngCookies", "ipCookie"]);
 
 require("./controllers/catalogController.js")(ucApp);
-//require("./controllers/itemController.js")(ucApp);
+require("./controllers/itemController.js")(ucApp);
 require("./controllers/homeController.js")(ucApp);
+require("./controllers/cartController.js")(ucApp);
 
 ucApp.config(["$routeProvider", function($routeProvider) {
     $routeProvider
@@ -23578,23 +23694,127 @@ ucApp.config(["$routeProvider", function($routeProvider) {
             templateUrl: "views/item.html",
             controller: "ItemController"
         })
+        .when("/cart", {
+            templateUrl: "views/cart.html",
+            controller: "CartController"
+        })
         .otherwise({
             redirectTo: "/"
         });
 }]); // end ucApp.config
-},{"./../../bower_components/angular-cookies/angular-cookies.js":2,"./../../bower_components/angular-resource/angular-resource.js":3,"./../../bower_components/angular-route/angular-route.js":4,"./../../bower_components/angular/angular":5,"./controllers/catalogController.js":7,"./controllers/homeController.js":8}],7:[function(require,module,exports){
+},{"./../../bower_components/angular-cookie/angular-cookie.js":2,"./../../bower_components/angular-cookies/angular-cookies.js":3,"./../../bower_components/angular-resource/angular-resource.js":4,"./../../bower_components/angular-route/angular-route.js":5,"./../../bower_components/angular/angular":6,"./controllers/cartController.js":8,"./controllers/catalogController.js":9,"./controllers/homeController.js":10,"./controllers/itemController.js":11}],8:[function(require,module,exports){
+"use strict";
+var baseUrl    = require("../../../../api/db");
+var cartUrl    = baseUrl.cartUrl;
+var itemUrl    = baseUrl.itemUrl;
+var merchantId = baseUrl.merchantId;
+
+module.exports = function(app) {
+    app.controller("CartController", function($scope, $http, $location, ipCookie) {
+        $http({
+            url: cartUrl + "&_mid=" + merchantId,
+            method: "GET",
+            dataType: "json"
+        })
+        .success(function(cart, status, headers, config) {
+            if(cart && cart.cartId) {
+                window.myCart = cart;
+                console.dir(myCart.cartId);
+                ipCookie("UltraCartShoppingCartID", myCart.cartId, { expires:7, expirationUnit:"days", path:'/'});
+                console.log(ipCookie("UltraCartShoppingCartID"));
+
+                $scope.cartDisplay = myCart;
+            }
+        })
+        .error(function(cart, status, headers, config) {
+            console.log("There was an error: " + cart);
+        });// end $http.get
+
+        // $scope.addItem = function() {
+        //     var item = "SEAM-ITEM-001";
+        //     var items = [];
+
+        //     var info = {
+        //         "merchantId": merchantId,
+        //         "cartId": "",
+        //         "items": items
+        //     };
+
+        //     $http({
+        //         url: cartUrl + "&_mid=" + merchantId,
+        //         method: "PUT",
+        //         data: info,
+        //         dataType: "json"
+        //     })
+        //     .success(function(data, status, headers, config){
+        //         var updatedCart = items.pop();
+        //         $http({
+        //             url: cartUrl + "&_mid=" + merchantId,
+        //             method: "PUT",
+        //             data: JSON.stringify(updatedCart),
+        //             dataType: "json",
+        //         })
+        //         .success(function(data, status, headers, config) {
+        //             $scope.newCart = data;
+        //         })
+        //         .error(function(data, status, headers, config){
+        //             console.log("there was an error in the updateCart http.put: " + status);
+        //         }); // end updateCart $http.put
+        //     })
+        //     .error(function(data, status, headers, config) {
+        //         console.log("there was an error in the main http.put: " + data);
+        //     });// end $scope.addItem
+        // }
+
+        $scope.addItem = function() {
+            var cartId = myCart.cartId;
+            var id = "SEAM-ITEM-001";
+            console.log("the cartId is: " + cartId);
+            var data = JSON.stringify({merchantId:merchantId, cartId: cartId});
+            if(cartId) {
+                $http({
+                    url: itemUrl + encodeURIComponent(id) + "&_mid=" + merchantId,
+                    method: "POST",
+                    //data: data,
+                    dataType: "json"
+                })
+                .success(function(data, status, headers, config) {
+                    window.myItem = data;
+                    console.log("myItem is: " + data);
+                    $scope.displayItem = data;
+                })
+                .error(function(data, status, headers, config) {
+                    console.log("there was an error: " + data);
+                }); // end $http.post
+            }
+        }
+
+    });// end app.controller("CartController")
+};// end module.exports
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+},{"../../../../api/db":1}],9:[function(require,module,exports){
 "use strict";
 var baseUrl = require("../../../../api/db");
-var cartUrl = baseUrl.cartUrl;
-var itemUrl = baseUrl.itemUrl;
 var catalogUrl = baseUrl.catalogUrl;
-
 
 console.log(catalogUrl);
 
 module.exports = function(app) {
 
-    app.controller("CatalogController", function($scope, $http) {
+    app.controller("CatalogController", function($scope, $http, $location) {
         $http({
             url: catalogUrl,
             method: "GET",
@@ -23605,10 +23825,16 @@ module.exports = function(app) {
         })
         .error(function(data, status, headers, config) {
             console.log("There was an error: " + data);
-        });
-    });
+        });// end $http.get
+
+    $scope.showDetails = function(id) {
+        $location.path("/item/" + id);
+    };
+    $scope.quantity = 10;
+
+    });// end app.controller
 }; // end module.exports
-},{"../../../../api/db":1}],8:[function(require,module,exports){
+},{"../../../../api/db":1}],10:[function(require,module,exports){
 "use strict";
 
 module.exports = function(app) {
@@ -23616,14 +23842,31 @@ module.exports = function(app) {
         $scope.message = "Thanks for coming to the Home Page buddy";
     }); // end app.controller("HomeController")
 }; // end module.exports
-},{}],9:[function(require,module,exports){
+},{}],11:[function(require,module,exports){
 "use strict";
+var baseUrl    = require("../../../../api/db");
+var cartUrl    = baseUrl.cartUrl;
+var itemUrl    = baseUrl.itemUrl;
+var merchantId = baseUrl.merchantId;
 
 module.exports = function(app) {
-    app.controller("ItemController", function($scope, $http) {
-        $scope.loadItem = function() {
+    app.controller("ItemController", function($scope, $http, $location, $routeParams) {
+        $scope.message = "I am on the ItemController page";
 
-        }
+        var id = $routeParams.id;
+
+        $http({
+            url:itemUrl + id + "&_mid=" + merchantId,
+            method: "GET",
+            dataType: "json"
+        })
+        .success(function(data, status, headers, config) {
+            $scope.itemDisplay = data;
+        })
+        .error(function(data, status, headers, config) {
+            console.log("there was an error: " + data);
+        });// end $http.get
+
     }); // end app.controller("ItemController")
 }; // end module.exports
-},{}]},{},[6,7,8,9]);
+},{"../../../../api/db":1}]},{},[7,8,9,10,11]);

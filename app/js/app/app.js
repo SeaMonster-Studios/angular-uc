@@ -2,12 +2,14 @@ require("angular/angular");
 require("angular-route");
 require("angular-resource");
 require("angular-cookies");
+require("angular-cookie");
 
-var ucApp = angular.module("ucApp", ["ngRoute", "ngCookies"]);
+var ucApp = angular.module("ucApp", ["ngRoute", "ngCookies", "ipCookie"]);
 
 require("./controllers/catalogController.js")(ucApp);
-//require("./controllers/itemController.js")(ucApp);
+require("./controllers/itemController.js")(ucApp);
 require("./controllers/homeController.js")(ucApp);
+require("./controllers/cartController.js")(ucApp);
 
 ucApp.config(["$routeProvider", function($routeProvider) {
     $routeProvider
@@ -22,6 +24,10 @@ ucApp.config(["$routeProvider", function($routeProvider) {
         .when("/item/:id", {
             templateUrl: "views/item.html",
             controller: "ItemController"
+        })
+        .when("/cart", {
+            templateUrl: "views/cart.html",
+            controller: "CartController"
         })
         .otherwise({
             redirectTo: "/"
