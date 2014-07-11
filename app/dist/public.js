@@ -23730,42 +23730,6 @@ module.exports = function(app) {
             console.log("There was an error: " + cart);
         });// end $http.get
 
-        // $scope.addItem = function() {
-        //     var item = "SEAM-ITEM-001";
-        //     var items = [];
-
-        //     var info = {
-        //         "merchantId": merchantId,
-        //         "cartId": "",
-        //         "items": items
-        //     };
-
-        //     $http({
-        //         url: cartUrl + "&_mid=" + merchantId,
-        //         method: "PUT",
-        //         data: info,
-        //         dataType: "json"
-        //     })
-        //     .success(function(data, status, headers, config){
-        //         var updatedCart = items.pop();
-        //         $http({
-        //             url: cartUrl + "&_mid=" + merchantId,
-        //             method: "PUT",
-        //             data: JSON.stringify(updatedCart),
-        //             dataType: "json",
-        //         })
-        //         .success(function(data, status, headers, config) {
-        //             $scope.newCart = data;
-        //         })
-        //         .error(function(data, status, headers, config){
-        //             console.log("there was an error in the updateCart http.put: " + status);
-        //         }); // end updateCart $http.put
-        //     })
-        //     .error(function(data, status, headers, config) {
-        //         console.log("there was an error in the main http.put: " + data);
-        //     });// end $scope.addItem
-        // }
-
         $scope.addItem = function() {
             var cartId = myCart.cartId;
             var id = "SEAM-ITEM-001";
@@ -23773,8 +23737,8 @@ module.exports = function(app) {
             var data = JSON.stringify({merchantId:merchantId, cartId: cartId});
             if(cartId) {
                 $http({
-                    url: itemUrl + encodeURIComponent(id) + "&_mid=" + merchantId,
-                    method: "POST",
+                    url: itemUrl + encodeURIComponent(id) + "&_mid=" + merchantId + "/" + cartId,
+                    method: "PUT",
                     //data: data,
                     dataType: "json"
                 })
