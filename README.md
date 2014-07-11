@@ -41,6 +41,17 @@ Header add Access-Control-Allow-Methods "PUT, GET, POST, DELETE, OPTIONS"
 ```
    you should receive back the json for an empty cart.
 
+Current Goals/tasks
+=================================
+ 1. ~~Build catalog page~~
+ 2. ~~Build item detail page~~
+ 3. Create cart
+ 4. Update cart
+ 5. Build checkout
+ 6. Submit payment
+ 7. Email receipt
+
+
 Issues and Bugs
 ======================================
 Current development issues and problems that I am trying to solve will be tracked as issues in the repo. For a list of what the current sticking points are, just check the open issues.
