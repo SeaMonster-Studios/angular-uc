@@ -28,7 +28,7 @@ module.exports = function(grunt) {
                     {
                         expand: true,
                         cwd: "app/",
-                        src: ["css/**/*.css", "*.html", "img/**/*.svg", "!Gruntfile.js", "fonts/**/*"],
+                        src: ["css/**/*.css", "*.html", "img/**/*.svg", "!Gruntfile.js", "fonts/**/*", "bower_components/bootstrap/dist/css/bootstrap.css"],
                         dest: "app/dist/",
                         flatten: false,
                         filter: "isFile"
@@ -57,7 +57,8 @@ module.exports = function(grunt) {
         sass: {
             dist: {
                 files: {
-                    "app/dist/style.css" : "sass/style.scss"
+                    "app/dist/style.css" : "sass/style.scss",
+                    "app/dist/wes.css" : "sass/wes.scss"
                 }
             }
         },
