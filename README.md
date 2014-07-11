@@ -41,7 +41,7 @@ Header add Access-Control-Allow-Methods "PUT, GET, POST, DELETE, OPTIONS"
 ```
    you should receive back the json for an empty cart.
 
-Current Goals/tasks
+Current Goals/Tasks
 =================================
  1. ~~Build catalog page~~
  2. ~~Build item detail page~~
