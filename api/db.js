@@ -2,7 +2,7 @@
 
 var merchantId = "SEAM";
 var i_am_using_a_proxy = true;
-var pathToProxy = "http://localhost:8888/restUCTest/rest_proxy.php";
+var pathToProxy = "http://localhost:8888/rest_proxy.php";
 var pathToCatalogUrl = "https://secure.ultracart.com/catalog/SEAM/"
 
 var fullPathCart = i_am_using_a_proxy ? pathToProxy + "?_url=/rest/cart/" : "/rest/cart/";
