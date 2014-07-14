@@ -3,13 +3,15 @@ require("angular-route");
 require("angular-resource");
 require("angular-cookies");
 require("angular-cookie");
+require("./factories/createCart");
 
-var ucApp = angular.module("ucApp", ["ngRoute", "ngCookies", "ipCookie"]);
+var ucApp = angular.module("ucApp", ["ngRoute", "ngCookies", "ipCookie", "CreateCart"]);
 
 require("./controllers/catalogController.js")(ucApp);
 require("./controllers/itemController.js")(ucApp);
 require("./controllers/homeController.js")(ucApp);
-require("./controllers/cartController.js")(ucApp);
+require("./controllers/cartController")(ucApp);
+
 
 ucApp.config(["$routeProvider", function($routeProvider) {
     $routeProvider

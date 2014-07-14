@@ -5,25 +5,27 @@ var itemUrl    = baseUrl.itemUrl;
 var merchantId = baseUrl.merchantId;
 
 module.exports = function(app) {
-    app.controller("CartController", function($scope, $http, $location, ipCookie) {
-        $http({
-            url: cartUrl + "&_mid=" + merchantId,
-            method: "GET",
-            dataType: "json"
-        })
-        .success(function(cart, status, headers, config) {
-            if(cart && cart.cartId) {
-                window.myCart = cart;
-                console.dir(myCart.cartId);
-                ipCookie("UltraCartShoppingCartID", myCart.cartId, { expires:7, expirationUnit:"days", path:'/'});
-                console.log(ipCookie("UltraCartShoppingCartID"));
-
-                $scope.cartDisplay = myCart;
-            }
-        })
-        .error(function(cart, status, headers, config) {
-            console.log("There was an error: " + cart);
-        });// end $http.get
+    app.controller("CartController", function($scope, $http, $location, ipCookie, CreateCart) {
+        $scope.createCart = function() {
+            // $http({
+            //     url: cartUrl + "&_mid=" + merchantId,
+            //     method: "GET",
+            //     dataType: "json"
+            // })
+            // .success(function(cart, status, headers, config) {
+            //     if(cart && cart.cartId) {
+            //         window.myCart = cart;
+            //         console.dir(myCart.cartId);
+            //         ipCookie("UltraCartShoppingCartID", myCart.cartId, { expires:7, expirationUnit:"days", path:'/'});
+            //         console.log(ipCookie("UltraCartShoppingCartID"));
+            //         console.dir(myCart);
+            //     }
+            // })
+            // .error(function(cart, status, headers, config) {
+            //     console.log("There was an error: " + cart);
+            // });// end $http.get
+            cart();
+        }// end $scope.createCart()
 
         $scope.addItem = function() {
             var cartId = myCart.cartId;
@@ -41,6 +43,7 @@ module.exports = function(app) {
                 .success(function(data, status, headers, config) {
                     window.myItem = data;
                     console.dir(myItem);
+                    //$scope.cartDisplay = myCart;
                     $scope.displayItem = myItem;
                 })
                 .error(function(data, status, headers, config) {

@@ -23696,13 +23696,15 @@ require("./../../bower_components/angular-route/angular-route.js");
 require("./../../bower_components/angular-resource/angular-resource.js");
 require("./../../bower_components/angular-cookies/angular-cookies.js");
 require("./../../bower_components/angular-cookie/angular-cookie.js");
+require("./factories/createCart");
 
-var ucApp = angular.module("ucApp", ["ngRoute", "ngCookies", "ipCookie"]);
+var ucApp = angular.module("ucApp", ["ngRoute", "ngCookies", "ipCookie", "CreateCart"]);
 
 require("./controllers/catalogController.js")(ucApp);
 require("./controllers/itemController.js")(ucApp);
 require("./controllers/homeController.js")(ucApp);
-require("./controllers/cartController.js")(ucApp);
+require("./controllers/cartController")(ucApp);
+
 
 ucApp.config(["$routeProvider", function($routeProvider) {
     $routeProvider
@@ -23726,7 +23728,7 @@ ucApp.config(["$routeProvider", function($routeProvider) {
             redirectTo: "/"
         });
 }]); // end ucApp.config
-},{"./../../bower_components/angular-cookie/angular-cookie.js":3,"./../../bower_components/angular-cookies/angular-cookies.js":4,"./../../bower_components/angular-resource/angular-resource.js":5,"./../../bower_components/angular-route/angular-route.js":6,"./../../bower_components/angular/angular":7,"./controllers/cartController.js":9,"./controllers/catalogController.js":10,"./controllers/homeController.js":11,"./controllers/itemController.js":12}],9:[function(require,module,exports){
+},{"./../../bower_components/angular-cookie/angular-cookie.js":3,"./../../bower_components/angular-cookies/angular-cookies.js":4,"./../../bower_components/angular-resource/angular-resource.js":5,"./../../bower_components/angular-route/angular-route.js":6,"./../../bower_components/angular/angular":7,"./controllers/cartController":9,"./controllers/catalogController.js":10,"./controllers/homeController.js":11,"./controllers/itemController.js":12,"./factories/createCart":13}],9:[function(require,module,exports){
 "use strict";
 var baseUrl    = require("../../../../api/db");
 var cartUrl    = baseUrl.cartUrl;
@@ -23734,25 +23736,27 @@ var itemUrl    = baseUrl.itemUrl;
 var merchantId = baseUrl.merchantId;
 
 module.exports = function(app) {
-    app.controller("CartController", function($scope, $http, $location, ipCookie) {
-        $http({
-            url: cartUrl + "&_mid=" + merchantId,
-            method: "GET",
-            dataType: "json"
-        })
-        .success(function(cart, status, headers, config) {
-            if(cart && cart.cartId) {
-                window.myCart = cart;
-                console.dir(myCart.cartId);
-                ipCookie("UltraCartShoppingCartID", myCart.cartId, { expires:7, expirationUnit:"days", path:'/'});
-                console.log(ipCookie("UltraCartShoppingCartID"));
-
-                $scope.cartDisplay = myCart;
-            }
-        })
-        .error(function(cart, status, headers, config) {
-            console.log("There was an error: " + cart);
-        });// end $http.get
+    app.controller("CartController", function($scope, $http, $location, ipCookie, CreateCart) {
+        $scope.createCart = function() {
+            // $http({
+            //     url: cartUrl + "&_mid=" + merchantId,
+            //     method: "GET",
+            //     dataType: "json"
+            // })
+            // .success(function(cart, status, headers, config) {
+            //     if(cart && cart.cartId) {
+            //         window.myCart = cart;
+            //         console.dir(myCart.cartId);
+            //         ipCookie("UltraCartShoppingCartID", myCart.cartId, { expires:7, expirationUnit:"days", path:'/'});
+            //         console.log(ipCookie("UltraCartShoppingCartID"));
+            //         console.dir(myCart);
+            //     }
+            // })
+            // .error(function(cart, status, headers, config) {
+            //     console.log("There was an error: " + cart);
+            // });// end $http.get
+            cart();
+        }// end $scope.createCart()
 
         $scope.addItem = function() {
             var cartId = myCart.cartId;
@@ -23770,6 +23774,7 @@ module.exports = function(app) {
                 .success(function(data, status, headers, config) {
                     window.myItem = data;
                     console.dir(myItem);
+                    //$scope.cartDisplay = myCart;
                     $scope.displayItem = myItem;
                 })
                 .error(function(data, status, headers, config) {
@@ -23857,4 +23862,38 @@ module.exports = function(app) {
 
     }); // end app.controller("ItemController")
 }; // end module.exports
-},{"../../../../api/db":1}]},{},[8,9,10,11,12]);
+},{"../../../../api/db":1}],13:[function(require,module,exports){
+"use strict";
+var baseUrl    = require("../../../../api/db");
+var cartUrl    = baseUrl.cartUrl;
+var itemUrl    = baseUrl.itemUrl;
+var merchantId = baseUrl.merchantId;
+
+module.exports = function(app) {
+    app.factory("CreateCart", function($scope, $http, $location, ipCookie) {
+
+        var cart = function() {
+            console.log("this is BS");
+            $http({
+                url: cartUrl + "&_mid=" + merchantId,
+                method: "GET",
+                dataType: "json"
+            })
+            .success(function(cart, status, headers, config) {
+                if(cart && cart.cartId) {
+                    window.myCart = cart;
+                    console.dir(myCart.cartId);
+                    ipCookie("UltraCartShoppingCartID", myCart.cartId, { expires:7, expirationUnit:"days", path:'/'});
+                    console.log(ipCookie("UltraCartShoppingCartID"));
+
+                    //$scope.cartDisplay = myCart;
+                }
+            })
+            .error(function(cart, status, headers, config) {
+                console.log("There was an error: " + cart);
+            });// end $http.get
+            return cart;
+        }
+    }); // end app.service("CreateCart")
+}; // end module.exports
+},{"../../../../api/db":1}]},{},[8,9,10,11,12,13]);
