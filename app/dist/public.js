@@ -23696,14 +23696,14 @@ require("./../../bower_components/angular-route/angular-route.js");
 require("./../../bower_components/angular-resource/angular-resource.js");
 require("./../../bower_components/angular-cookies/angular-cookies.js");
 require("./../../bower_components/angular-cookie/angular-cookie.js");
-require("./factories/createCart");
 
-var ucApp = angular.module("ucApp", ["ngRoute", "ngCookies", "ipCookie", "CreateCart"]);
+var ucApp = angular.module("ucApp", ["ngRoute", "ngCookies", "ipCookie"]);
 
 require("./controllers/catalogController.js")(ucApp);
 require("./controllers/itemController.js")(ucApp);
 require("./controllers/homeController.js")(ucApp);
 require("./controllers/cartController")(ucApp);
+require("./factories/createCart")(ucApp);
 
 
 ucApp.config(["$routeProvider", function($routeProvider) {
@@ -23737,7 +23737,7 @@ var merchantId = baseUrl.merchantId;
 
 module.exports = function(app) {
     app.controller("CartController", function($scope, $http, $location, ipCookie, CreateCart) {
-        $scope.createCart = function() {
+        //$scope.createCart = function() {
             // $http({
             //     url: cartUrl + "&_mid=" + merchantId,
             //     method: "GET",
@@ -23755,8 +23755,11 @@ module.exports = function(app) {
             // .error(function(cart, status, headers, config) {
             //     console.log("There was an error: " + cart);
             // });// end $http.get
-            cart();
-        }// end $scope.createCart()
+
+        //}// end $scope.createCart()
+        $scope.createCart = function() {
+            CreateCart.create();
+        };
 
         $scope.addItem = function() {
             var cartId = myCart.cartId;
@@ -23870,9 +23873,10 @@ var itemUrl    = baseUrl.itemUrl;
 var merchantId = baseUrl.merchantId;
 
 module.exports = function(app) {
-    app.factory("CreateCart", function($scope, $http, $location, ipCookie) {
-
-        var cart = function() {
+    app.factory("CreateCart", function($http, $location, ipCookie) {
+        var cart = {};
+        console.log("does this work");
+        cart.create = function() {
             console.log("this is BS");
             $http({
                 url: cartUrl + "&_mid=" + merchantId,
@@ -23885,15 +23889,15 @@ module.exports = function(app) {
                     console.dir(myCart.cartId);
                     ipCookie("UltraCartShoppingCartID", myCart.cartId, { expires:7, expirationUnit:"days", path:'/'});
                     console.log(ipCookie("UltraCartShoppingCartID"));
-
-                    //$scope.cartDisplay = myCart;
+                    console.dir(cart);
+                    return cart;
                 }
             })
             .error(function(cart, status, headers, config) {
                 console.log("There was an error: " + cart);
             });// end $http.get
-            return cart;
         }
-    }); // end app.service("CreateCart")
+        return cart;
+    }); // end app.facotry("CreateCart")
 }; // end module.exports
 },{"../../../../api/db":1}]},{},[8,9,10,11,12,13]);

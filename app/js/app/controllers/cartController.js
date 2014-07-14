@@ -6,7 +6,7 @@ var merchantId = baseUrl.merchantId;
 
 module.exports = function(app) {
     app.controller("CartController", function($scope, $http, $location, ipCookie, CreateCart) {
-        $scope.createCart = function() {
+        //$scope.createCart = function() {
             // $http({
             //     url: cartUrl + "&_mid=" + merchantId,
             //     method: "GET",
@@ -24,8 +24,11 @@ module.exports = function(app) {
             // .error(function(cart, status, headers, config) {
             //     console.log("There was an error: " + cart);
             // });// end $http.get
-            cart();
-        }// end $scope.createCart()
+
+        //}// end $scope.createCart()
+        $scope.createCart = function() {
+            CreateCart.create();
+        };
 
         $scope.addItem = function() {
             var cartId = myCart.cartId;
