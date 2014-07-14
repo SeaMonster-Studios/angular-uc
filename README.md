@@ -24,9 +24,9 @@ RewriteEngine On
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteRule ^ index.php [QSA,L]
 
-Header add Access-Control-Allow-Origin "*"
-Header add Access-Control-Allow-Headers "*"
-Header add Access-Control-Allow-Methods "PUT, GET, POST, DELETE, OPTIONS"
+Header set Access-Control-Allow-Origin "*"
+Header set Access-Control-Allow-Headers "*"
+Header set Access-Control-Allow-Methods "PUT, GET, POST, DELETE, OPTIONS"
 ``````````````
  * Test rest_proxy.php.
    Test #1: If you call it directly from the web browser, you should receive back this response: "UltraCart rest proxy script called incorrectly.  _url query parameter is required.
