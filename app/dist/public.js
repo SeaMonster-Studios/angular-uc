@@ -3,7 +3,18 @@
 
 // The merchantId is kept in an untracked file called dbAlt.js.
 // This a secrutity measure so your actual merchantId is out there for the world to see.
-// Make sure to set the merchantId in the dbAlt.js file.
+// Make sure to create this file if you are going to use a public repo and want your UC merchant ID kept secret
+
+// The file should follow the format of
+
+// var merchantId = "<YOUR MERCHANT ID GOES HERE";
+
+// module.exports = {
+//     ID : merchantId
+// }
+
+// Then just require the file into this one as seen in the
+// var merchant = require("./dbAlt.js");
 
 var merchant = require("./dbAlt.js");
 var merchantId = merchant.ID;
