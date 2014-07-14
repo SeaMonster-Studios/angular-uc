@@ -106,7 +106,7 @@ module.exports = function(grunt) {
                 }
             },
             express: {
-                files: ["server.js", "api/routes/*.js", "api/modesl/*.js", "api/auth/*.js"],
+                files: ["server.js", "api/routes/*.js", "api/auth/*.js", "api/*.js"],
                 tasks: ['server'],
                 options: {
                     spawn: false
