@@ -45,8 +45,8 @@ Current Goals/Tasks
 =================================
  1. ~~Build catalog page~~
  2. ~~Build item detail page~~
- 3. Create cart
- 4. Update cart
+ 3. ~~Create cart~~
+ 4. ~~Update cart~~
  5. Build checkout
  6. Submit payment
  7. Email receipt
