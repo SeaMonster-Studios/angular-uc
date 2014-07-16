@@ -1,6 +1,6 @@
 node_modules
 app/bower_components
 .sass-cache
-app/dist
+app/dist/**/*.js
 setup_env.sh
 api/dbAlt.js
