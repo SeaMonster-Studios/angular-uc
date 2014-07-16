@@ -48,6 +48,10 @@ Current Goals/Tasks
  3. ~~Create cart~~
  4. ~~Update cart~~
  5. Build checkout
+      * Render cart items
+      * reorganize Cart_1.0.js file into smaller files
+      * Add billing and shipping fields
+      * Add CC payment inputs and authentication
  6. Submit payment
  7. Email receipt
 
