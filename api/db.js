@@ -27,9 +27,13 @@ var fullPathItem = i_am_using_a_proxy ? pathToProxy + "?_url=/rest/site/items/" 
 var catalogPath = i_am_using_a_proxy ? pathToProxy + "?_url=/rest/site/items" : "/rest/site/items";
 var fullPathCatalog = catalogPath + "&_mid=" + merchantId + "&url=" + pathToCatalogUrl;
 
+var checkoutPath = i_am_using_a_proxy ? pathToProxy + "?_url=/rest/cart/" : "/rest/cart/";
+var fullPathCheckout = checkoutPath + "&_mid=" + merchantId + "/checkout";
+
 module.exports = {
     cartUrl : fullPathCart,
     itemUrl : fullPathItem,
     catalogUrl : fullPathCatalog,
-    merchantId : merchantId
+    merchantId : merchantId,
+    checkoutUrl : fullPathCheckout
 };

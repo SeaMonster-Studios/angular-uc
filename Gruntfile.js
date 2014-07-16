@@ -36,7 +36,7 @@ module.exports = function(grunt) {
                     {
                         expand: true,
                         cwd: "app/js/app/",
-                        src: ["views/*.html"],
+                        src: ["views/**/*.html"],
                         dest: "app/dist/",
                         flatten: false,
                         filter: "isFile"

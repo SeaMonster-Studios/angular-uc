@@ -10,7 +10,9 @@ require("./controllers/catalogController.js")(ucApp);
 require("./controllers/itemController.js")(ucApp);
 require("./controllers/homeController.js")(ucApp);
 require("./controllers/cartController")(ucApp);
-require("./factories/createCart")(ucApp);
+require("./controllers/checkoutItemsController")(ucApp);
+require("./factories/loadCartFactory")(ucApp);
+require("./factories/createCartFactory")(ucApp);
 
 
 ucApp.config(["$routeProvider", function($routeProvider) {
@@ -30,6 +32,9 @@ ucApp.config(["$routeProvider", function($routeProvider) {
         .when("/cart", {
             templateUrl: "views/cart.html",
             controller: "CartController"
+        })
+        .when("/checkout", {
+            templateUrl: "views/checkout.html"
         })
         .otherwise({
             redirectTo: "/"

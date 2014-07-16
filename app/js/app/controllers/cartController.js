@@ -67,7 +67,12 @@ module.exports = function(app) {
                 })
                 .success(function(data, status, headers, config) {
                     $scope.cartDisplay = data;
-                    console.log("addItem success");
+                    CreateCart.addProducts(data);
+                    CreateCart.getProducts();
+                    //console.log("did I update the cart service? " + cart);
+                    console.log("I have added an item to the cart");
+                    window.cartObj = data;
+                    return cartObj;
                 })
                 .error(function(data, status, headers, config) {
                     console.log("there was an error with addItem(): " + data);
