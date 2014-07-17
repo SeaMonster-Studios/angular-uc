@@ -3,7 +3,7 @@ var baseUrl = require("../../../../api/db");
 var catalogUrl = baseUrl.catalogUrl;
 
 console.log(catalogUrl);
-
+var merchantId = 'SEAM';
 module.exports = function(app) {
 
     app.controller("CatalogController", function($scope, $http, $location) {
@@ -11,7 +11,8 @@ module.exports = function(app) {
             url: catalogUrl,
             method: "GET",
             dataType: "json",
-            cache: false
+            cache: false,
+            params: {_mid: merchantId}
         })
         .success(function(data, status, headers, config) {
             $scope.catalogDisplay = data;

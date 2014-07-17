@@ -10,14 +10,22 @@ module.exports = function(app) {
         $scope.createCart = function() {
             CreateCart.create();
             console.log("is this even being called?");
-        }
-        $scope.createCart();
 
-        $scope.message = function() {
-            console.log("This is the CheckoutItemsController");
-            //console.log(cartObj);
-            CreateCart.getProducts();
+            var defer = $q.defer();
+
+            defer.promise
+                .then(function(myCart) {
+                    $scope.message = myCart;
+                });
+
+                defer.resolve(myCart);
+
         }
-        $scope.message();
+        $scope.createCart()
+
+
+
+
+
     });
 };// end module.exports

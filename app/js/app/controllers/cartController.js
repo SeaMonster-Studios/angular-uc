@@ -8,6 +8,7 @@ module.exports = function(app) {
     app.controller("CartController", function($scope, $http, $location, $q, ipCookie, CreateCart) {
         $scope.createCart = function() {
             CreateCart.create();
+            console.log("called CreateCart.create()");
         }
         $scope.createCart();
 
