@@ -10,7 +10,8 @@ module.exports = function(app) {
         $http({
             url: catalogUrl,
             method: "GET",
-            dataType: "json"
+            dataType: "json",
+            cache: false
         })
         .success(function(data, status, headers, config) {
             $scope.catalogDisplay = data;

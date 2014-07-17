@@ -58,8 +58,9 @@ module.exports = function(app) {
         cart.create = function() {
 
                 return $http({
-                        url: cartUrl + "&_mid=" + merchantId,
+                        url: cartUrl,
                         method: "GET",
+                        params: {_mid: merchantId},
                         dataType: "json"
                     })
                     .success(function(cart, status, headers, config) {

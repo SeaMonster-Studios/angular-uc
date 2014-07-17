@@ -11,9 +11,11 @@ module.exports = function(app) {
         var id = $routeParams.id;
 
         $http({
-            url:itemUrl + id + "&_mid=" + merchantId,
+            url:itemUrl + id,
             method: "GET",
-            dataType: "json"
+            params: {_mid: merchantId},
+            dataType: "json",
+            cache: false
         })
         .success(function(data, status, headers, config) {
             $scope.itemDisplay = data;

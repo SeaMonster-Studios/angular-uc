@@ -23759,10 +23759,12 @@ module.exports = function(app) {
                 var data = JSON.stringify({merchantId:merchantId, cartId: myCart.cartId});
 
                 $http({
-                    url: itemUrl + encodeURIComponent(id) + "&_mid=" + merchantId,
+                    url: itemUrl + encodeURIComponent(id),
                     method: "POST",
+                    params: {_mid: merchantId},
                     data: data,
-                    dataType: "json"
+                    dataType: "json",
+                    cache: false
                 })
                 .success(function(data, status, headers, config) {
                     window.myItem = data;
@@ -23774,8 +23776,9 @@ module.exports = function(app) {
                 }); // end $http.post
             } else {
                 $http({
-                    url: itemUrl + encodeURIComponent(id) + "&_mid=" + merchantId,
+                    url: itemUrl + encodeURIComponent(id),
                     method: "GET",
+                    params: {_mid: merchantId},
                     dataType: "json"
                 })
                 .success(function(data, status, headers, config) {
@@ -23803,7 +23806,8 @@ module.exports = function(app) {
                     url: cartUrl,
                     method: "POST",
                     data: jCart,
-                    dataType: "json"
+                    dataType: "json",
+                    cache: false
                 })
                 .success(function(data, status, headers, config) {
                     $scope.cartDisplay = data;
@@ -23848,7 +23852,8 @@ module.exports = function(app) {
         $http({
             url: catalogUrl,
             method: "GET",
-            dataType: "json"
+            dataType: "json",
+            cache: false
         })
         .success(function(data, status, headers, config) {
             $scope.catalogDisplay = data;
@@ -23910,9 +23915,11 @@ module.exports = function(app) {
         var id = $routeParams.id;
 
         $http({
-            url:itemUrl + id + "&_mid=" + merchantId,
+            url:itemUrl + id,
             method: "GET",
-            dataType: "json"
+            params: {_mid: merchantId},
+            dataType: "json",
+            cache: false
         })
         .success(function(data, status, headers, config) {
             $scope.itemDisplay = data;
@@ -23984,8 +23991,9 @@ module.exports = function(app) {
         cart.create = function() {
 
                 return $http({
-                        url: cartUrl + "&_mid=" + merchantId,
+                        url: cartUrl,
                         method: "GET",
+                        params: {_mid: merchantId},
                         dataType: "json"
                     })
                     .success(function(cart, status, headers, config) {

@@ -19,10 +19,12 @@ module.exports = function(app) {
                 var data = JSON.stringify({merchantId:merchantId, cartId: myCart.cartId});
 
                 $http({
-                    url: itemUrl + encodeURIComponent(id) + "&_mid=" + merchantId,
+                    url: itemUrl + encodeURIComponent(id),
                     method: "POST",
+                    params: {_mid: merchantId},
                     data: data,
-                    dataType: "json"
+                    dataType: "json",
+                    cache: false
                 })
                 .success(function(data, status, headers, config) {
                     window.myItem = data;
@@ -34,8 +36,9 @@ module.exports = function(app) {
                 }); // end $http.post
             } else {
                 $http({
-                    url: itemUrl + encodeURIComponent(id) + "&_mid=" + merchantId,
+                    url: itemUrl + encodeURIComponent(id),
                     method: "GET",
+                    params: {_mid: merchantId},
                     dataType: "json"
                 })
                 .success(function(data, status, headers, config) {
@@ -63,7 +66,8 @@ module.exports = function(app) {
                     url: cartUrl,
                     method: "POST",
                     data: jCart,
-                    dataType: "json"
+                    dataType: "json",
+                    cache: false
                 })
                 .success(function(data, status, headers, config) {
                     $scope.cartDisplay = data;
