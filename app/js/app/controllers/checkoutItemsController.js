@@ -6,22 +6,11 @@ var merchantId = baseUrl.merchantId;
 var checkoutUrl = baseUrl.checkoutUrl;
 
 module.exports = function(app) {
-    app.controller("CheckoutItemsController", function($scope, $http, $location, $q, ipCookie, CreateCart) {
-        $scope.createCart = function() {
-            CreateCart.create();
-            console.log("is this even being called?");
-
-            var defer = $q.defer();
-
-            defer.promise
-                .then(function(myCart) {
-                    $scope.message = myCart;
-                });
-
-                defer.resolve(myCart);
-
+    app.controller("CheckoutItemsController", function($scope, $http, $location, $q, ipCookie, CreateCart, LoadCart) {
+        $scope.loadCart = function() {
+            LoadCart.load();
         }
-        $scope.createCart()
+        $scope.loadCart()
 
 
 
