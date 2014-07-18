@@ -19,6 +19,7 @@ module.exports = function(app) {
                 .success(function(cart, status, headers, config) {
                     console.log("inside of .success IF ipCookie exists");
                     window.myCart = cart;
+                    console.log(ipCookie("UltraCartShoppingCartID"));
                     console.log("cart was created with cookie: " + cart.cartId);
                     return cart;
                 })

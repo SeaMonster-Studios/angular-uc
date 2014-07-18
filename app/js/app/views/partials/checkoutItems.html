@@ -1,5 +1,11 @@
 <h4>Look at me! I'm an include called checkoutItems.html</h4>
 <div class="checkoutItemsContainer">
-    {{message}}
+    <div data-ng-repeat="item in loadCart.items">
+        <p>Item: {{item.itemId}}</p>
+        <p>cost: {{item.unitCost}}</p>
+        <button data-ng-click="removeItem(item.position)">Remove Item</button>
+    </div>
+    <p>Subtotal: {{loadCart.subtotal}}</p>
+    <button data-ng-click="keepShopping()">Keep Shopping</button>
 </div>
 <!-- end .checkoutItemsContainer -->
