@@ -15,10 +15,8 @@ module.exports = function(app) {
         $scope.loadItem = function() {
             var myCart = {};
             var id = "SEAM-ITEM-001";
-
             if(myCart.cartId) {
                 var data = JSON.stringify({merchantId:merchantId, cartId: myCart.cartId});
-
                 $http({
                     url: itemUrl + encodeURIComponent(id),
                     method: "POST",
@@ -49,7 +47,7 @@ module.exports = function(app) {
                 .error(function(data, status, headers, config) {
                     console.log("there was an error: " + data);
                 });
-            }
+            }// end if/else (myCart.cartId)
         }// end $scope.loadItem
 
         $scope.loadItem();
@@ -82,7 +80,7 @@ module.exports = function(app) {
                 .error(function(data, status, headers, config) {
                     console.log("there was an error with addItem(): " + data);
                 }); // end $http.post
-            }
+            }// end if(itemId)
         }// end $scope.addItem
     });// end app.controller("CartController")
 };// end module.exports
