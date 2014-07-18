@@ -18,12 +18,7 @@ module.exports = function(app) {
                     dataType: "json"
                 })
                 .success(function(cart, status, headers, config) {
-                    console.log("inside of .success IF ipCookie exists loadCart");
                     window.myCart = cart;
-                    console.log(ipCookie("UltraCartShoppingCartID"));
-                    console.log("cart was created with loadCart cookie: " + cart.cartId);
-                    //$scope.message = myCart;
-                    //return cart;
                     deferred.resolve(myCart);
                 })
                 .error(function(cart, status, headers, config) {
@@ -39,13 +34,9 @@ module.exports = function(app) {
                     dataType: "json"
                 })
                 .success(function(cart, status, headers, config) {
-                    console.log("inside of .success ELSE");
-                        window.myCart = cart;
-                        ipCookie("UltraCartShoppingCartID", cart.cartId, { expires:7, expirationUnit:"days"});
-                        console.log("cart was created: " + cart);
-                        //$scope.message = myCart;
-                        //return cart;
-                        deferrd.resolve(myCart);
+                    window.myCart = cart;
+                    ipCookie("UltraCartShoppingCartID", cart.cartId, { expires:7, expirationUnit:"days"});
+                    deferrd.resolve(myCart);
                 })
                 .error(function(cart, status, headers, config) {
                     console.log("There was an error: " + cart);

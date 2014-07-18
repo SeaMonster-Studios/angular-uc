@@ -23752,7 +23752,6 @@ module.exports = function(app) {
     app.controller("CartController", function($scope, $http, $location, $q, ipCookie, CreateCart, AddItem) {
         $scope.createCart = function() {
             CreateCart.create();
-            console.log("called CreateCart.create()");
         }
         $scope.createCart();
 
@@ -23801,40 +23800,7 @@ module.exports = function(app) {
             AddItem.add(id).then(function() {
                 $scope.createCart();
             });
-
-
-        }
-
-        // $scope.addItem = function() {
-        //     var itemId = window.myItem.itemId;
-        //     console.dir(itemId);
-        //     if(itemId) {
-        //         if(!myCart.items) {
-        //             myCart['items'] = [];
-        //         }
-        //         myCart.items.push({itemId: itemId, quantity: 1});
-        //         var jCart = JSON.stringify(myCart);
-        //         $http({
-        //             url: cartUrl,
-        //             method: "POST",
-        //             data: jCart,
-        //             dataType: "json",
-        //             cache: false
-        //         })
-        //         .success(function(data, status, headers, config) {
-        //             $scope.cartDisplay = data;
-        //             CreateCart.addProducts(data);
-        //             CreateCart.getProducts();
-        //             //console.log("did I update the cart service? " + cart);
-        //             console.log("I have added an item to the cart");
-        //             window.cartObj = data;
-        //             return cartObj;
-        //         })
-        //         .error(function(data, status, headers, config) {
-        //             console.log("there was an error with addItem(): " + data);
-        //         }); // end $http.post
-        //     }// end if(itemId)
-        // }// end $scope.addItem
+        }// end $scope.addItem
     });// end app.controller("CartController")
 };// end module.exports
 
@@ -23893,8 +23859,6 @@ var checkoutUrl = baseUrl.checkoutUrl;
 module.exports = function(app) {
     app.controller("CheckoutItemsController", function($scope, $http, $location, $q, ipCookie, CreateCart, LoadCart) {
         LoadCart.load().then(function(myCart) {
-            console.log("inside of the then()");
-            console.dir(myCart);
             $scope.loadCart = myCart.data;
         });
 
@@ -23903,7 +23867,6 @@ module.exports = function(app) {
         }
 
         $scope.removeItem = function(pos) {
-            console.log("the position is: " + pos);
             var cartItems = $scope.loadCart;
             var newCart = cartItems.items;
             newCart.splice(newCart.indexOf(pos), 1);
@@ -23926,10 +23889,6 @@ module.exports = function(app) {
                 console.log("there was an error with updateCart: " + data);
             });
         }// end $scope.removeItem
-
-
-
-
     });
 };// end module.exports
 },{"../../../../api/db":1}],12:[function(require,module,exports){
@@ -23969,20 +23928,16 @@ module.exports = function(app) {
 
         $scope.addItem = function(id) {
             AddItem.add(id);
-            console.log("id passed was: " + id);
-            console.dir(myCart.items);
         }
 
         $scope.createCart = function() {
             CreateCart.create();
-            console.log("called CreateCart.create()");
         }
         $scope.createCart();
 
         $scope.goToCheckout = function() {
             $location.path("/checkout");
-        }
-
+        }// end $scope.goToCheckout
     }); // end app.controller("ItemController")
 }; // end module.exports
 },{"../../../../api/db":1}],14:[function(require,module,exports){
@@ -24034,7 +23989,6 @@ var merchantId = baseUrl.merchantId;
 module.exports = function(app) {
     app.factory("CreateCart", function($http, $location, ipCookie) {
         var cart = {};
-        var productList = [];
         cart.create = function() {
             if(ipCookie("UltraCartShoppingCartID")) {
                 return $http({
@@ -24044,10 +23998,7 @@ module.exports = function(app) {
                     dataType: "json"
                 })
                 .success(function(cart, status, headers, config) {
-                    console.log("inside of .success IF ipCookie exists");
                     window.myCart = cart;
-                    console.log(ipCookie("UltraCartShoppingCartID"));
-                    console.log("cart was created with cookie: " + cart.cartId);
                     return cart;
                 })
                 .error(function(cart, status, headers, config) {
@@ -24061,10 +24012,8 @@ module.exports = function(app) {
                     dataType: "json"
                 })
                 .success(function(cart, status, headers, config) {
-                    console.log("inside of .success ELSE");
                         window.myCart = cart;
                         ipCookie("UltraCartShoppingCartID", cart.cartId, { expires:7, expirationUnit:"days"});
-                        console.log("cart was created: " + cart);
                         return cart;
                 })
                 .error(function(cart, status, headers, config) {
@@ -24072,14 +24021,6 @@ module.exports = function(app) {
                 });// end $http.get
             }// end if/else (ipCookie)
         }// end cart.create
-        cart.addProducts = function(newProduct) {
-            productList.push(newProduct);
-        }
-        cart.getProducts = function() {
-            console.dir(productList);
-            window.fullCart = productList;
-            return fullCart;
-        }
         return cart;
     }); // end app.facotry("CreateCart")
 }; // end module.exports
@@ -24105,12 +24046,7 @@ module.exports = function(app) {
                     dataType: "json"
                 })
                 .success(function(cart, status, headers, config) {
-                    console.log("inside of .success IF ipCookie exists loadCart");
                     window.myCart = cart;
-                    console.log(ipCookie("UltraCartShoppingCartID"));
-                    console.log("cart was created with loadCart cookie: " + cart.cartId);
-                    //$scope.message = myCart;
-                    //return cart;
                     deferred.resolve(myCart);
                 })
                 .error(function(cart, status, headers, config) {
@@ -24126,13 +24062,9 @@ module.exports = function(app) {
                     dataType: "json"
                 })
                 .success(function(cart, status, headers, config) {
-                    console.log("inside of .success ELSE");
-                        window.myCart = cart;
-                        ipCookie("UltraCartShoppingCartID", cart.cartId, { expires:7, expirationUnit:"days"});
-                        console.log("cart was created: " + cart);
-                        //$scope.message = myCart;
-                        //return cart;
-                        deferrd.resolve(myCart);
+                    window.myCart = cart;
+                    ipCookie("UltraCartShoppingCartID", cart.cartId, { expires:7, expirationUnit:"days"});
+                    deferrd.resolve(myCart);
                 })
                 .error(function(cart, status, headers, config) {
                     console.log("There was an error: " + cart);

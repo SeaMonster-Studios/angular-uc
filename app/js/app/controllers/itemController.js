@@ -26,19 +26,15 @@ module.exports = function(app) {
 
         $scope.addItem = function(id) {
             AddItem.add(id);
-            console.log("id passed was: " + id);
-            console.dir(myCart.items);
         }
 
         $scope.createCart = function() {
             CreateCart.create();
-            console.log("called CreateCart.create()");
         }
         $scope.createCart();
 
         $scope.goToCheckout = function() {
             $location.path("/checkout");
-        }
-
+        }// end $scope.goToCheckout
     }); // end app.controller("ItemController")
 }; // end module.exports

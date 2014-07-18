@@ -8,8 +8,6 @@ var checkoutUrl = baseUrl.checkoutUrl;
 module.exports = function(app) {
     app.controller("CheckoutItemsController", function($scope, $http, $location, $q, ipCookie, CreateCart, LoadCart) {
         LoadCart.load().then(function(myCart) {
-            console.log("inside of the then()");
-            console.dir(myCart);
             $scope.loadCart = myCart.data;
         });
 
@@ -18,7 +16,6 @@ module.exports = function(app) {
         }
 
         $scope.removeItem = function(pos) {
-            console.log("the position is: " + pos);
             var cartItems = $scope.loadCart;
             var newCart = cartItems.items;
             newCart.splice(newCart.indexOf(pos), 1);
@@ -41,9 +38,5 @@ module.exports = function(app) {
                 console.log("there was an error with updateCart: " + data);
             });
         }// end $scope.removeItem
-
-
-
-
     });
 };// end module.exports
