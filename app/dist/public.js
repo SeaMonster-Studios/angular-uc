@@ -23713,6 +23713,7 @@ require("./controllers/cartController")(ucApp);
 require("./controllers/checkoutItemsController")(ucApp);
 require("./factories/loadCartFactory")(ucApp);
 require("./factories/createCartFactory")(ucApp);
+require("./factories/addItemFactory")(ucApp);
 
 
 ucApp.config(["$routeProvider", function($routeProvider) {
@@ -23740,7 +23741,7 @@ ucApp.config(["$routeProvider", function($routeProvider) {
             redirectTo: "/"
         });
 }]); // end ucApp.config
-},{"./../../bower_components/angular-cookie/angular-cookie.js":3,"./../../bower_components/angular-cookies/angular-cookies.js":4,"./../../bower_components/angular-resource/angular-resource.js":5,"./../../bower_components/angular-route/angular-route.js":6,"./../../bower_components/angular/angular":7,"./controllers/cartController":9,"./controllers/catalogController.js":10,"./controllers/checkoutItemsController":11,"./controllers/homeController.js":12,"./controllers/itemController.js":13,"./factories/createCartFactory":14,"./factories/loadCartFactory":15}],9:[function(require,module,exports){
+},{"./../../bower_components/angular-cookie/angular-cookie.js":3,"./../../bower_components/angular-cookies/angular-cookies.js":4,"./../../bower_components/angular-resource/angular-resource.js":5,"./../../bower_components/angular-route/angular-route.js":6,"./../../bower_components/angular/angular":7,"./controllers/cartController":9,"./controllers/catalogController.js":10,"./controllers/checkoutItemsController":11,"./controllers/homeController.js":12,"./controllers/itemController.js":13,"./factories/addItemFactory":14,"./factories/createCartFactory":15,"./factories/loadCartFactory":16}],9:[function(require,module,exports){
 "use strict";
 var baseUrl    = require("../../../../api/db");
 var cartUrl    = baseUrl.cartUrl;
@@ -23938,7 +23939,7 @@ var itemUrl    = baseUrl.itemUrl;
 var merchantId = baseUrl.merchantId;
 
 module.exports = function(app) {
-    app.controller("ItemController", function($scope, $http, $location, $routeParams) {
+    app.controller("ItemController", function($scope, $http, $location, $routeParams, AddItem, CreateCart) {
         $scope.message = "I am on the ItemController page";
 
         var id = $routeParams.id;
@@ -23957,9 +23958,60 @@ module.exports = function(app) {
             console.log("there was an error: " + data);
         });// end $http.get
 
+        $scope.addItem = function(id) {
+            AddItem.add(id);
+            console.log("id passed was: " + id);
+            console.dir(myCart.items);
+        }
+
+        $scope.createCart = function() {
+            CreateCart.create();
+            console.log("called CreateCart.create()");
+        }
+        $scope.createCart();
+
+        $scope.goToCheckout = function() {
+            $location.path("/checkout");
+        }
+
     }); // end app.controller("ItemController")
 }; // end module.exports
 },{"../../../../api/db":1}],14:[function(require,module,exports){
+"use strict";
+var baseUrl    = require("../../../../api/db");
+var cartUrl    = baseUrl.cartUrl;
+var itemUrl    = baseUrl.itemUrl;
+var merchantId = baseUrl.merchantId;
+
+module.exports = function(app) {
+    app.factory("AddItem", function($http, $location, $q, ipCookie) {
+        var cart = {};
+        cart.add = function(id) {
+            if(!myCart.items) {
+                myCart['items'] = [];
+            }
+            myCart.items.push({itemId: id, quantity: 1});
+            var jCart = JSON.stringify(myCart);
+            return $http({
+                url: cartUrl,
+                method: "POST",
+                data: jCart,
+                params: {_mid: merchantId, _cid: ipCookie("UltraCartShoppingCartID")},
+                dataType: "json",
+                cache: false
+            })
+            .success(function(cart, status, headers, config) {
+                window.myCart = cart;
+                return cart;
+            })
+            .error(function(cart, status, headers, config) {
+                console.log("there was an error with AddItem: " + cart);
+            });
+        }
+        return cart;
+    });// end app.factory("AddItem")
+}// end module.exports
+},{"../../../../api/db":1}],15:[function(require,module,exports){
 "use strict";
 var baseUrl    = require("../../../../api/db");
 var cartUrl    = baseUrl.cartUrl;
@@ -24019,7 +24071,7 @@ module.exports = function(app) {
     }); // end app.facotry("CreateCart")
 }; // end module.exports
 
-},{"../../../../api/db":1}],15:[function(require,module,exports){
+},{"../../../../api/db":1}],16:[function(require,module,exports){
 "use strict";
 var baseUrl    = require("../../../../api/db");
 var cartUrl    = baseUrl.cartUrl;
@@ -24080,4 +24132,4 @@ module.exports = function(app) {
         return deferred.promise;
     }); // end app.factory("LoadCart")
 };// end module.exports
-},{"../../../../api/db":1}]},{},[8,9,10,11,12,13,14,15]);
+},{"../../../../api/db":1}]},{},[8,9,10,11,12,13,14,15,16]);

@@ -5,7 +5,7 @@ var itemUrl    = baseUrl.itemUrl;
 var merchantId = baseUrl.merchantId;
 
 module.exports = function(app) {
-    app.controller("ItemController", function($scope, $http, $location, $routeParams) {
+    app.controller("ItemController", function($scope, $http, $location, $routeParams, AddItem, CreateCart) {
         $scope.message = "I am on the ItemController page";
 
         var id = $routeParams.id;
@@ -23,6 +23,22 @@ module.exports = function(app) {
         .error(function(data, status, headers, config) {
             console.log("there was an error: " + data);
         });// end $http.get
+
+        $scope.addItem = function(id) {
+            AddItem.add(id);
+            console.log("id passed was: " + id);
+            console.dir(myCart.items);
+        }
+
+        $scope.createCart = function() {
+            CreateCart.create();
+            console.log("called CreateCart.create()");
+        }
+        $scope.createCart();
+
+        $scope.goToCheckout = function() {
+            $location.path("/checkout");
+        }
 
     }); // end app.controller("ItemController")
 }; // end module.exports

@@ -3,5 +3,7 @@
     <div>
         <p>{{itemDisplay.description}}</p>
         <p>{{itemDisplay.cost}}</p>
+        <button data-ng-click="addItem(itemDisplay.itemId)">Add to cart</button>
+        <button data-ng-click="goToCheckout()">Go to Checkout</button>
     </div>
 </section>

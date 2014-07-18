@@ -13,6 +13,7 @@ require("./controllers/cartController")(ucApp);
 require("./controllers/checkoutItemsController")(ucApp);
 require("./factories/loadCartFactory")(ucApp);
 require("./factories/createCartFactory")(ucApp);
+require("./factories/addItemFactory")(ucApp);
 
 
 ucApp.config(["$routeProvider", function($routeProvider) {
