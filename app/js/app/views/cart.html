@@ -6,7 +6,7 @@
         <p>Cart Items: {{cartDisplay.total | currency}}</p>
     </div>
     <div>
-        <button data-ng-click="addItem()">Add to cart</button>
+        <button data-ng-click="addItem(displayItem.itemId)">Add to cart</button>
         <p>{{displayItem.itemId}}</p><a data-ng-href="#/checkout">Checkout</a>
     </div>
 </section>

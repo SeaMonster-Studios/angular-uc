@@ -23749,7 +23749,7 @@ var itemUrl    = baseUrl.itemUrl;
 var merchantId = baseUrl.merchantId;
 
 module.exports = function(app) {
-    app.controller("CartController", function($scope, $http, $location, $q, ipCookie, CreateCart) {
+    app.controller("CartController", function($scope, $http, $location, $q, ipCookie, CreateCart, AddItem) {
         $scope.createCart = function() {
             CreateCart.create();
             console.log("called CreateCart.create()");
@@ -23796,36 +23796,45 @@ module.exports = function(app) {
 
         $scope.loadItem();
 
-        $scope.addItem = function() {
-            var itemId = window.myItem.itemId;
-            console.dir(itemId);
-            if(itemId) {
-                if(!myCart.items) {
-                    myCart['items'] = [];
-                }
-                myCart.items.push({itemId: itemId, quantity: 1});
-                var jCart = JSON.stringify(myCart);
-                $http({
-                    url: cartUrl,
-                    method: "POST",
-                    data: jCart,
-                    dataType: "json",
-                    cache: false
-                })
-                .success(function(data, status, headers, config) {
-                    $scope.cartDisplay = data;
-                    CreateCart.addProducts(data);
-                    CreateCart.getProducts();
-                    //console.log("did I update the cart service? " + cart);
-                    console.log("I have added an item to the cart");
-                    window.cartObj = data;
-                    return cartObj;
-                })
-                .error(function(data, status, headers, config) {
-                    console.log("there was an error with addItem(): " + data);
-                }); // end $http.post
-            }// end if(itemId)
-        }// end $scope.addItem
+        $scope.addItem = function(id) {
+            console.log("id passed was: " + id);
+            AddItem.add(id).then(function() {
+                $scope.createCart();
+            });
+
+
+        }
+
+        // $scope.addItem = function() {
+        //     var itemId = window.myItem.itemId;
+        //     console.dir(itemId);
+        //     if(itemId) {
+        //         if(!myCart.items) {
+        //             myCart['items'] = [];
+        //         }
+        //         myCart.items.push({itemId: itemId, quantity: 1});
+        //         var jCart = JSON.stringify(myCart);
+        //         $http({
+        //             url: cartUrl,
+        //             method: "POST",
+        //             data: jCart,
+        //             dataType: "json",
+        //             cache: false
+        //         })
+        //         .success(function(data, status, headers, config) {
+        //             $scope.cartDisplay = data;
+        //             CreateCart.addProducts(data);
+        //             CreateCart.getProducts();
+        //             //console.log("did I update the cart service? " + cart);
+        //             console.log("I have added an item to the cart");
+        //             window.cartObj = data;
+        //             return cartObj;
+        //         })
+        //         .error(function(data, status, headers, config) {
+        //             console.log("there was an error with addItem(): " + data);
+        //         }); // end $http.post
+        //     }// end if(itemId)
+        // }// end $scope.addItem
     });// end app.controller("CartController")
 };// end module.exports
 
@@ -23987,6 +23996,7 @@ module.exports = function(app) {
     app.factory("AddItem", function($http, $location, $q, ipCookie) {
         var cart = {};
         cart.add = function(id) {
+            var deferred = $q.defer();
             if(!myCart.items) {
                 myCart['items'] = [];
             }
@@ -24002,13 +24012,16 @@ module.exports = function(app) {
             })
             .success(function(cart, status, headers, config) {
                 window.myCart = cart;
-                return cart;
+                deferred.resolve(myCart);
             })
             .error(function(cart, status, headers, config) {
                 console.log("there was an error with AddItem: " + cart);
+                deferred.reject();
             });
+            return deferred.promise;
         }
         return cart;
+        return deferred.promise;
     });// end app.factory("AddItem")
 }// end module.exports
 },{"../../../../api/db":1}],15:[function(require,module,exports){

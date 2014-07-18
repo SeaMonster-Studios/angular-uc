@@ -8,6 +8,7 @@ module.exports = function(app) {
     app.factory("AddItem", function($http, $location, $q, ipCookie) {
         var cart = {};
         cart.add = function(id) {
+            var deferred = $q.defer();
             if(!myCart.items) {
                 myCart['items'] = [];
             }
@@ -23,12 +24,15 @@ module.exports = function(app) {
             })
             .success(function(cart, status, headers, config) {
                 window.myCart = cart;
-                return cart;
+                deferred.resolve(myCart);
             })
             .error(function(cart, status, headers, config) {
                 console.log("there was an error with AddItem: " + cart);
+                deferred.reject();
             });
+            return deferred.promise;
         }
         return cart;
+        return deferred.promise;
     });// end app.factory("AddItem")
 }// end module.exports
