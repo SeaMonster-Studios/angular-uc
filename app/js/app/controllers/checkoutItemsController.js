@@ -8,6 +8,7 @@ var checkoutUrl = baseUrl.checkoutUrl;
 module.exports = function(app) {
     app.controller("CheckoutItemsController", function($scope, $http, $location, $q, ipCookie, CreateCart, LoadCart) {
         LoadCart.load().then(function(myCart) {
+            console.log("LoadCart.load()");
             $scope.loadCart = myCart.data;
         });
 

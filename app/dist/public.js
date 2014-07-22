@@ -23859,6 +23859,7 @@ var checkoutUrl = baseUrl.checkoutUrl;
 module.exports = function(app) {
     app.controller("CheckoutItemsController", function($scope, $http, $location, $q, ipCookie, CreateCart, LoadCart) {
         LoadCart.load().then(function(myCart) {
+            console.log("LoadCart.load()");
             $scope.loadCart = myCart.data;
         });
 
@@ -23907,7 +23908,7 @@ var itemUrl    = baseUrl.itemUrl;
 var merchantId = baseUrl.merchantId;
 
 module.exports = function(app) {
-    app.controller("ItemController", function($scope, $http, $location, $routeParams, AddItem, CreateCart) {
+    app.controller("ItemController", function($scope, $http, $location, $routeParams, AddItem, CreateCart, LoadCart, ipCookie) {
         $scope.message = "I am on the ItemController page";
 
         var id = $routeParams.id;
@@ -23927,11 +23928,21 @@ module.exports = function(app) {
         });// end $http.get
 
         $scope.addItem = function(id) {
+            console.log("inside of addItem");
             AddItem.add(id);
         }
 
         $scope.createCart = function() {
-            CreateCart.create();
+            console.log("createCart from itemController");
+            if(ipCookie("UltraCartShoppingCartID")) {
+                LoadCart.load().then(function(myCart) {
+                    console.log("LoadCart.load() from ItemController");
+                    //$scope.loadCart = myCart.data;
+                });
+            } else {
+                console.log("inside else createCart");
+                CreateCart.create();
+            }
         }
         $scope.createCart();
 
@@ -23951,6 +23962,7 @@ module.exports = function(app) {
     app.factory("AddItem", function($http, $location, $q, ipCookie) {
         var cart = {};
         cart.add = function(id) {
+            console.log("inside cart.add");
             var deferred = $q.defer();
             if(!myCart.items) {
                 myCart['items'] = [];
@@ -23966,6 +23978,7 @@ module.exports = function(app) {
                 cache: false
             })
             .success(function(cart, status, headers, config) {
+                console.log("inside of cart.add success");
                 window.myCart = cart;
                 deferred.resolve(myCart);
             })
@@ -23998,6 +24011,7 @@ module.exports = function(app) {
                     dataType: "json"
                 })
                 .success(function(cart, status, headers, config) {
+                    console.log("inside cart.create if success");
                     window.myCart = cart;
                     return cart;
                 })
@@ -24012,6 +24026,7 @@ module.exports = function(app) {
                     dataType: "json"
                 })
                 .success(function(cart, status, headers, config) {
+                    console.log("inside cart.create else success");
                         window.myCart = cart;
                         ipCookie("UltraCartShoppingCartID", cart.cartId, { expires:7, expirationUnit:"days"});
                         return cart;
@@ -24046,6 +24061,7 @@ module.exports = function(app) {
                     dataType: "json"
                 })
                 .success(function(cart, status, headers, config) {
+                    console.log("inside LoadCart if cart.load success");
                     window.myCart = cart;
                     deferred.resolve(myCart);
                 })
@@ -24062,6 +24078,7 @@ module.exports = function(app) {
                     dataType: "json"
                 })
                 .success(function(cart, status, headers, config) {
+                    console.log("inside LoadCart else cart.load success");
                     window.myCart = cart;
                     ipCookie("UltraCartShoppingCartID", cart.cartId, { expires:7, expirationUnit:"days"});
                     deferrd.resolve(myCart);

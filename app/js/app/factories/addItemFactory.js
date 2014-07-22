@@ -8,6 +8,7 @@ module.exports = function(app) {
     app.factory("AddItem", function($http, $location, $q, ipCookie) {
         var cart = {};
         cart.add = function(id) {
+            console.log("inside cart.add");
             var deferred = $q.defer();
             if(!myCart.items) {
                 myCart['items'] = [];
@@ -23,6 +24,7 @@ module.exports = function(app) {
                 cache: false
             })
             .success(function(cart, status, headers, config) {
+                console.log("inside of cart.add success");
                 window.myCart = cart;
                 deferred.resolve(myCart);
             })

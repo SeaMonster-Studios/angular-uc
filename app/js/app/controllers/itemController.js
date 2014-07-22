@@ -5,7 +5,7 @@ var itemUrl    = baseUrl.itemUrl;
 var merchantId = baseUrl.merchantId;
 
 module.exports = function(app) {
-    app.controller("ItemController", function($scope, $http, $location, $routeParams, AddItem, CreateCart) {
+    app.controller("ItemController", function($scope, $http, $location, $routeParams, AddItem, CreateCart, LoadCart, ipCookie) {
         $scope.message = "I am on the ItemController page";
 
         var id = $routeParams.id;
@@ -25,11 +25,21 @@ module.exports = function(app) {
         });// end $http.get
 
         $scope.addItem = function(id) {
+            console.log("inside of addItem");
             AddItem.add(id);
         }
 
         $scope.createCart = function() {
-            CreateCart.create();
+            console.log("createCart from itemController");
+            if(ipCookie("UltraCartShoppingCartID")) {
+                LoadCart.load().then(function(myCart) {
+                    console.log("LoadCart.load() from ItemController");
+                    //$scope.loadCart = myCart.data;
+                });
+            } else {
+                console.log("inside else createCart");
+                CreateCart.create();
+            }
         }
         $scope.createCart();
 

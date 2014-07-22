@@ -16,6 +16,7 @@ module.exports = function(app) {
                     dataType: "json"
                 })
                 .success(function(cart, status, headers, config) {
+                    console.log("inside cart.create if success");
                     window.myCart = cart;
                     return cart;
                 })
@@ -30,6 +31,7 @@ module.exports = function(app) {
                     dataType: "json"
                 })
                 .success(function(cart, status, headers, config) {
+                    console.log("inside cart.create else success");
                         window.myCart = cart;
                         ipCookie("UltraCartShoppingCartID", cart.cartId, { expires:7, expirationUnit:"days"});
                         return cart;

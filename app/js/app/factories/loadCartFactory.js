@@ -18,6 +18,7 @@ module.exports = function(app) {
                     dataType: "json"
                 })
                 .success(function(cart, status, headers, config) {
+                    console.log("inside LoadCart if cart.load success");
                     window.myCart = cart;
                     deferred.resolve(myCart);
                 })
@@ -34,6 +35,7 @@ module.exports = function(app) {
                     dataType: "json"
                 })
                 .success(function(cart, status, headers, config) {
+                    console.log("inside LoadCart else cart.load success");
                     window.myCart = cart;
                     ipCookie("UltraCartShoppingCartID", cart.cartId, { expires:7, expirationUnit:"days"});
                     deferrd.resolve(myCart);
