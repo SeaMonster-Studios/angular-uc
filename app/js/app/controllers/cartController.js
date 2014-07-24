@@ -5,9 +5,18 @@ var itemUrl    = baseUrl.itemUrl;
 var merchantId = baseUrl.merchantId;
 
 module.exports = function(app) {
-    app.controller("CartController", function($scope, $http, $location, $q, ipCookie, CreateCart, AddItem) {
+    app.controller("CartController", function($scope, $http, $location, $q, ipCookie, CreateCart, AddItem, LoadCart) {
         $scope.createCart = function() {
-            CreateCart.create();
+            if(ipCookie("UltraCartShoppingCartID")) {
+                console.log("scope.createCart inside if => LoadCart");
+                LoadCart.load().then(function() {
+                    $scope.cartDisplay = myCart;
+                });
+            } else {
+                CreateCart.create().then(function() {
+                    $scope.cartDisplay = myCart;
+                });
+            }
         }
         $scope.createCart();
 
@@ -53,9 +62,18 @@ module.exports = function(app) {
 
         $scope.addItem = function(id) {
             console.log("id passed was: " + id);
-            AddItem.add(id).then(function() {
-                $scope.createCart();
-            });
+            if(ipCookie("UltraCartShoppingCartID")) {
+                AddItem.add(id).then(function() {
+                    console.log("add.item LoadCart");
+                    LoadCart.load();
+                    $scope.cartDisplay = myCart;
+                });
+            } else {
+                AddItem.add(id).then(function() {
+                    console.log("add.item $scope.createCart()");
+                    $scope.createCart();
+                });
+            }
         }// end $scope.addItem
     });// end app.controller("CartController")
 };// end module.exports
