@@ -11,17 +11,40 @@ module.exports = function(app) {
 
         $scope.billingInfo = {};
         var cart = {};
-        //$scope.billingInfo = myCart;
-        $scope.saveBilling = function(billing) {
-            $scope.billingInfo = angular.copy(billing);
+        $scope.sameAddress = function(billing) {
+            console.log("inside of sameAddress()");
+            $scope.billingInfo            = angular.copy(billing);
 
-            myCart.billToFirstName = $scope.billingInfo.fname;
-            myCart.billToLastName = $scope.billingInfo.lname;
-            myCart.billToAddress1 = $scope.billingInfo.address1;
-            myCart.billToAddress2 = $scope.billingInfo.address2;
-            myCart.billToCity = $scope.billingInfo.city;
-            myCart.billToState = $scope.billingInfo.state;
+            $scope.shipping = {
+                fname    : $scope.billingInfo.fname,
+                lname    : $scope.billingInfo.lname,
+                address1 : $scope.billingInfo.address1,
+                address2 : $scope.billingInfo.address2,
+                city     : $scope.billingInfo.city,
+                state    : $scope.billingInfo.state,
+                postal   : $scope.billingInfo.postal
+            }
+        }
+
+        $scope.saveBilling = function(billing, shipping) {
+            $scope.billingInfo      = angular.copy(billing);
+            $scope.shippingInfo     = angular.copy(shipping);
+
+            myCart.billToFirstName  = $scope.billingInfo.fname;
+            myCart.billToLastName   = $scope.billingInfo.lname;
+            myCart.billToAddress1   = $scope.billingInfo.address1;
+            myCart.billToAddress2   = $scope.billingInfo.address2;
+            myCart.billToCity       = $scope.billingInfo.city;
+            myCart.billToState      = $scope.billingInfo.state;
             myCart.billToPostalCode = $scope.billingInfo.postal;
+
+            myCart.shipToFirstName  = $scope.shippingInfo.fname;
+            myCart.shipToLastName   = $scope.shippingInfo.lname;
+            myCart.shipToAddress1   = $scope.shippingInfo.address1;
+            myCart.shipToAddress2   = $scope.shippingInfo.address2;
+            myCart.shipToCity       = $scope.shippingInfo.city;
+            myCart.shipToState      = $scope.shippingInfo.state;
+            myCart.shipToPostalCode = $scope.shippingInfo.postal;
 
             var jCart = JSON.stringify(myCart);
             return $http({
