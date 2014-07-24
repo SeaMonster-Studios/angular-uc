@@ -23711,6 +23711,7 @@ require("./controllers/itemController.js")(ucApp);
 require("./controllers/homeController.js")(ucApp);
 require("./controllers/cartController")(ucApp);
 require("./controllers/checkoutItemsController")(ucApp);
+require("./controllers/checkoutShippingController")(ucApp);
 require("./factories/loadCartFactory")(ucApp);
 require("./factories/createCartFactory")(ucApp);
 require("./factories/addItemFactory")(ucApp);
@@ -23741,7 +23742,7 @@ ucApp.config(["$routeProvider", function($routeProvider) {
             redirectTo: "/"
         });
 }]); // end ucApp.config
-},{"./../../bower_components/angular-cookie/angular-cookie.js":3,"./../../bower_components/angular-cookies/angular-cookies.js":4,"./../../bower_components/angular-resource/angular-resource.js":5,"./../../bower_components/angular-route/angular-route.js":6,"./../../bower_components/angular/angular":7,"./controllers/cartController":9,"./controllers/catalogController.js":10,"./controllers/checkoutItemsController":12,"./controllers/homeController.js":13,"./controllers/itemController.js":14,"./factories/addItemFactory":15,"./factories/createCartFactory":16,"./factories/loadCartFactory":17}],9:[function(require,module,exports){
+},{"./../../bower_components/angular-cookie/angular-cookie.js":3,"./../../bower_components/angular-cookies/angular-cookies.js":4,"./../../bower_components/angular-resource/angular-resource.js":5,"./../../bower_components/angular-route/angular-route.js":6,"./../../bower_components/angular/angular":7,"./controllers/cartController":9,"./controllers/catalogController.js":10,"./controllers/checkoutItemsController":11,"./controllers/checkoutShippingController":12,"./controllers/homeController.js":13,"./controllers/itemController.js":14,"./factories/addItemFactory":15,"./factories/createCartFactory":16,"./factories/loadCartFactory":17}],9:[function(require,module,exports){
 "use strict";
 var baseUrl    = require("../../../../api/db");
 var cartUrl    = baseUrl.cartUrl;
@@ -23867,8 +23868,6 @@ module.exports = function(app) {
     });// end app.controller
 }; // end module.exports
 },{"../../../../api/db":1}],11:[function(require,module,exports){
-
-},{}],12:[function(require,module,exports){
 "use strict";
 var baseUrl    = require("../../../../api/db");
 var cartUrl    = baseUrl.cartUrl;
@@ -23912,6 +23911,54 @@ module.exports = function(app) {
         }// end $scope.removeItem
     });
 };// end module.exports
+},{"../../../../api/db":1}],12:[function(require,module,exports){
+"use strict";
+var baseUrl    = require("../../../../api/db");
+var cartUrl    = baseUrl.cartUrl;
+var itemUrl    = baseUrl.itemUrl;
+var merchantId = baseUrl.merchantId;
+var checkoutUrl = baseUrl.checkoutUrl;
+
+module.exports = function(app) {
+    app.controller("CheckoutShippingController", function($scope, $http, $location, $q, ipCookie, CreateCart, LoadCart) {
+        $scope.message = "yo!";
+
+        $scope.billingInfo = {};
+        var cart = {};
+        //$scope.billingInfo = myCart;
+        $scope.saveBilling = function(billing) {
+            $scope.billingInfo = angular.copy(billing);
+
+            myCart.billToFirstName = $scope.billingInfo.fname;
+            myCart.billToLastName = $scope.billingInfo.lname;
+            myCart.billToAddress1 = $scope.billingInfo.address1;
+            myCart.billToAddress2 = $scope.billingInfo.address2;
+            myCart.billToCity = $scope.billingInfo.city;
+            myCart.billToState = $scope.billingInfo.state;
+            myCart.billToPostalCode = $scope.billingInfo.postal;
+
+            var jCart = JSON.stringify(myCart);
+            return $http({
+                url: cartUrl,
+                method: "POST",
+                data: jCart,
+                params: {_mid: merchantId, _cid: ipCookie("UltraCartShoppingCartID")},
+                dataType: "json",
+                cache: false
+            })
+            .success(function(cart, status, headers, config) {
+                console.log("inside success for saving billing info");
+                window.myCart = cart;
+                return cart;
+            })
+            .error(function(cart, status, headers, config) {
+                console.log("there was an error with saveBilling: " + cart);
+            }); // end $http(post)
+            return cart;
+        }
+        return cart;
+    });// end app.controller("CheckoutShippingController")
+}; // end module.exports
 },{"../../../../api/db":1}],13:[function(require,module,exports){
 "use strict";
 

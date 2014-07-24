@@ -1,0 +1,17 @@
+<h4>Look at me! I'm an include called checkoutShipping.html</h4>
+<div class="checkoutShippingContainer">
+    <h3>{{message}}</h3>
+    <form novalidate method="POST">
+        First Name: <input type="text" ng-model="billing.fname" /><br>
+        Last Name: <input type="text" ng-model="billing.lname" /><br>
+        Address 1: <input type="text" ng-model="billing.address1" /><br>
+        Address 2: <input type="text" ng-model="billing.address2" /><br>
+        City: <input type="text" ng-model="billing.city" /><br>
+        State: <input type="text" ng-model="billing.state" /><br>
+        Postal Code: <input type="text" ng-model="billing.postal" /><br>
+        <button data-ng-click="saveBilling(billing)">Save</button>
+    </form>
+    <p>This is the billing address that will be used</p>
+    <pre>{{billingInfo | json}}</pre>
+</div>
+<!-- end .checkoutItemsContainer -->

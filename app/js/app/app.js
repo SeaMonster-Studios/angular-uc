@@ -11,6 +11,7 @@ require("./controllers/itemController.js")(ucApp);
 require("./controllers/homeController.js")(ucApp);
 require("./controllers/cartController")(ucApp);
 require("./controllers/checkoutItemsController")(ucApp);
+require("./controllers/checkoutShippingController")(ucApp);
 require("./factories/loadCartFactory")(ucApp);
 require("./factories/createCartFactory")(ucApp);
 require("./factories/addItemFactory")(ucApp);
