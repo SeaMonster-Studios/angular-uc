@@ -13,7 +13,7 @@ module.exports = function(app) {
         var cart = {};
         $scope.sameAddress = function(billing) {
             console.log("inside of sameAddress()");
-            $scope.billingInfo            = angular.copy(billing);
+            $scope.billingInfo = angular.copy(billing);
 
             $scope.shipping = {
                 fname    : $scope.billingInfo.fname,
