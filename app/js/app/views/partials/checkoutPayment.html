@@ -1,0 +1,29 @@
+<div class="checkoutPaymentContainer">
+    <h4>{{message}}</h4>
+    <label>Credit Card #
+        <input type="text" name="" value="" data-ng-model="cc.number">
+    </label><br>
+    <label>Credit Card Type
+        <select
+            class="creditCardType"
+            data-ng-options="card for card in creditCard.type"
+            data-ng-model="cc.type">
+        </select>
+    </label><br>
+    <label>Credit Card Expiration Date
+        <select
+            class="creditCardType"
+            data-ng-options="card for card in creditCard.month"
+            data-ng-model="cc.month">
+        </select>
+        <select
+            class="creditCardType"
+            data-ng-options="card for card in creditCard.year"
+            data-ng-model="cc.year">
+        </select>
+    </label><br>
+    <label>Credit Card CSV
+        <input type="text" name="" value="" data-ng-model="cc.csv">
+    </label><br>
+    <button data-ng-click="saveCC(cc)">Submit CC data</button>
+</div>
