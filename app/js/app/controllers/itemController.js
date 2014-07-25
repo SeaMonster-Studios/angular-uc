@@ -26,7 +26,10 @@ module.exports = function(app) {
 
         $scope.addItem = function(id) {
             console.log("inside of addItem");
-            AddItem.add(id);
+            AddItem.add(id).then(function() {
+                console.log("inside of defered call");
+                $scope.createCart();
+            });
         }
 
         $scope.createCart = function() {
@@ -34,7 +37,7 @@ module.exports = function(app) {
             if(ipCookie("UltraCartShoppingCartID")) {
                 LoadCart.load().then(function(myCart) {
                     console.log("LoadCart.load() from ItemController");
-                    //$scope.loadCart = myCart.data;
+                    $scope.cartDisplay = myCart.data;
                 });
             } else {
                 console.log("inside else createCart");

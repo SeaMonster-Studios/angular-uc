@@ -9,12 +9,15 @@ module.exports = function(app) {
         $scope.createCart = function() {
             if(ipCookie("UltraCartShoppingCartID")) {
                 console.log("scope.createCart inside if => LoadCart");
-                LoadCart.load().then(function() {
-                    $scope.cartDisplay = myCart;
+                LoadCart.load().then(function(myCart) {
+                    console.log(myCart.data);
+                    $scope.cartDisplay = myCart.data;
                 });
             } else {
-                CreateCart.create().then(function() {
-                    $scope.cartDisplay = myCart;
+                CreateCart.create().then(function(myCart) {
+                    console.log("createCart in CartController");
+                    console.log(myCart);
+                    $scope.cartDisplay = myCart.data;
                 });
             }
         }
