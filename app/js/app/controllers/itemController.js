@@ -30,10 +30,9 @@ module.exports = function(app) {
                 console.log("inside of defered call");
                 $scope.createCart();
             });
-        }
+        }// end $scope.addItem()
 
         $scope.createCart = function() {
-            console.log("createCart from itemController");
             if(ipCookie("UltraCartShoppingCartID")) {
                 LoadCart.load().then(function(myCart) {
                     console.log("LoadCart.load() from ItemController");
@@ -41,13 +40,18 @@ module.exports = function(app) {
                 });
             } else {
                 console.log("inside else createCart");
-                CreateCart.create();
+                CreateCart.create().then(function(myCart) {
+                    console.log("CreateCart.create() from ItemController");
+                    $scope.cartDisplay = myCart.data;
+                });
             }
-        }
+        }// end $scopeCreateCart()
+
         $scope.createCart();
 
         $scope.goToCheckout = function() {
             $location.path("/checkout");
         }// end $scope.goToCheckout
+
     }); // end app.controller("ItemController")
 }; // end module.exports

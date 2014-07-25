@@ -23712,6 +23712,7 @@ require("./controllers/homeController.js")(ucApp);
 require("./controllers/cartController")(ucApp);
 require("./controllers/checkoutItemsController")(ucApp);
 require("./controllers/checkoutShippingController")(ucApp);
+require("./controllers/checkoutPaymentController")(ucApp);
 require("./factories/loadCartFactory")(ucApp);
 require("./factories/createCartFactory")(ucApp);
 require("./factories/addItemFactory")(ucApp);
@@ -23742,7 +23743,7 @@ ucApp.config(["$routeProvider", function($routeProvider) {
             redirectTo: "/"
         });
 }]); // end ucApp.config
-},{"./../../bower_components/angular-cookie/angular-cookie.js":3,"./../../bower_components/angular-cookies/angular-cookies.js":4,"./../../bower_components/angular-resource/angular-resource.js":5,"./../../bower_components/angular-route/angular-route.js":6,"./../../bower_components/angular/angular":7,"./controllers/cartController":9,"./controllers/catalogController.js":10,"./controllers/checkoutItemsController":11,"./controllers/checkoutShippingController":12,"./controllers/homeController.js":13,"./controllers/itemController.js":14,"./factories/addItemFactory":15,"./factories/createCartFactory":16,"./factories/loadCartFactory":17}],9:[function(require,module,exports){
+},{"./../../bower_components/angular-cookie/angular-cookie.js":3,"./../../bower_components/angular-cookies/angular-cookies.js":4,"./../../bower_components/angular-resource/angular-resource.js":5,"./../../bower_components/angular-route/angular-route.js":6,"./../../bower_components/angular/angular":7,"./controllers/cartController":9,"./controllers/catalogController.js":10,"./controllers/checkoutItemsController":11,"./controllers/checkoutPaymentController":12,"./controllers/checkoutShippingController":13,"./controllers/homeController.js":14,"./controllers/itemController.js":15,"./factories/addItemFactory":16,"./factories/createCartFactory":17,"./factories/loadCartFactory":18}],9:[function(require,module,exports){
 "use strict";
 var baseUrl    = require("../../../../api/db");
 var cartUrl    = baseUrl.cartUrl;
@@ -23922,6 +23923,19 @@ var itemUrl    = baseUrl.itemUrl;
 var merchantId = baseUrl.merchantId;
 var checkoutUrl = baseUrl.checkoutUrl;
 
+modulel.exports = function(app) {
+    app.controller("CheckoutPaymentController", function($scope, $http, $location, $q, ipCookie, CreateCart, LoadCart) {
+
+    });// end app.controller("CheckoutPaymentController")
+}; // end modulel.exports
+},{"../../../../api/db":1}],13:[function(require,module,exports){
+"use strict";
+var baseUrl    = require("../../../../api/db");
+var cartUrl    = baseUrl.cartUrl;
+var itemUrl    = baseUrl.itemUrl;
+var merchantId = baseUrl.merchantId;
+var checkoutUrl = baseUrl.checkoutUrl;
+
 module.exports = function(app) {
     app.controller("CheckoutShippingController", function($scope, $http, $location, $q, ipCookie, CreateCart, LoadCart) {
         $scope.message = "yo!";
@@ -23985,7 +23999,7 @@ module.exports = function(app) {
         return cart;
     });// end app.controller("CheckoutShippingController")
 }; // end module.exports
-},{"../../../../api/db":1}],13:[function(require,module,exports){
+},{"../../../../api/db":1}],14:[function(require,module,exports){
 "use strict";
 
 module.exports = function(app) {
@@ -23993,7 +24007,7 @@ module.exports = function(app) {
         $scope.message = "Thanks for coming to the Home Page buddy";
     }); // end app.controller("HomeController")
 }; // end module.exports
-},{}],14:[function(require,module,exports){
+},{}],15:[function(require,module,exports){
 "use strict";
 var baseUrl    = require("../../../../api/db");
 var cartUrl    = baseUrl.cartUrl;
@@ -24026,10 +24040,9 @@ module.exports = function(app) {
                 console.log("inside of defered call");
                 $scope.createCart();
             });
-        }
+        }// end $scope.addItem()
 
         $scope.createCart = function() {
-            console.log("createCart from itemController");
             if(ipCookie("UltraCartShoppingCartID")) {
                 LoadCart.load().then(function(myCart) {
                     console.log("LoadCart.load() from ItemController");
@@ -24037,17 +24050,22 @@ module.exports = function(app) {
                 });
             } else {
                 console.log("inside else createCart");
-                CreateCart.create();
+                CreateCart.create().then(function(myCart) {
+                    console.log("CreateCart.create() from ItemController");
+                    $scope.cartDisplay = myCart.data;
+                });
             }
-        }
+        }// end $scopeCreateCart()
+
         $scope.createCart();
 
         $scope.goToCheckout = function() {
             $location.path("/checkout");
         }// end $scope.goToCheckout
+
     }); // end app.controller("ItemController")
 }; // end module.exports
-},{"../../../../api/db":1}],15:[function(require,module,exports){
+},{"../../../../api/db":1}],16:[function(require,module,exports){
 "use strict";
 var baseUrl    = require("../../../../api/db");
 var cartUrl    = baseUrl.cartUrl;
@@ -24088,7 +24106,7 @@ module.exports = function(app) {
         return deferred.promise;
     });// end app.factory("AddItem")
 }// end module.exports
-},{"../../../../api/db":1}],16:[function(require,module,exports){
+},{"../../../../api/db":1}],17:[function(require,module,exports){
 "use strict";
 var baseUrl    = require("../../../../api/db");
 var cartUrl    = baseUrl.cartUrl;
@@ -24136,7 +24154,7 @@ module.exports = function(app) {
     }); // end app.facotry("CreateCart")
 }; // end module.exports
 
-},{"../../../../api/db":1}],17:[function(require,module,exports){
+},{"../../../../api/db":1}],18:[function(require,module,exports){
 "use strict";
 var baseUrl    = require("../../../../api/db");
 var cartUrl    = baseUrl.cartUrl;
@@ -24190,4 +24208,4 @@ module.exports = function(app) {
         return deferred.promise;
     }); // end app.factory("LoadCart")
 };// end module.exports
-},{"../../../../api/db":1}]},{},[8,9,10,11,12,13,14,15,16,17]);
+},{"../../../../api/db":1}]},{},[8,9,10,11,12,13,14,15,16,17,18]);
