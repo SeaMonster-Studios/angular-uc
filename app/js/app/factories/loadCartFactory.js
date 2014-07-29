@@ -11,10 +11,11 @@ module.exports = function(app) {
         cart.load = function() {
             var deferred = $q.defer();
             if(ipCookie("UltraCartShoppingCartID")) {
+                var cookie = ipCookie("UltraCartShoppingCartID");
                 return $http({
                     url: cartUrl,
                     method: "GET",
-                    params: {_mid: merchantId, _cid: ipCookie("UltraCartShoppingCartID")},
+                    params: {_mid: merchantId, _cid: cookie},
                     dataType: "json"
                 })
                 .success(function(cart, status, headers, config) {
@@ -37,7 +38,7 @@ module.exports = function(app) {
                 .success(function(cart, status, headers, config) {
                     console.log("inside LoadCart else cart.load success");
                     window.myCart = cart;
-                    ipCookie("UltraCartShoppingCartID", cart.cartId, { expires:7, expirationUnit:"days"});
+                    ipCookie("UltraCartShoppingCartID", cart.cartId, { expires:1, expirationUnit:"hours"});
                     deferrd.resolve(myCart);
                 })
                 .error(function(cart, status, headers, config) {

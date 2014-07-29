@@ -9,6 +9,7 @@ module.exports = function(app) {
         var cart = {};
         cart.create = function() {
             if(ipCookie("UltraCartShoppingCartID")) {
+
                 return $http({
                     url: cartUrl,
                     method: "GET",
@@ -33,7 +34,7 @@ module.exports = function(app) {
                 .success(function(cart, status, headers, config) {
                     console.log("inside cart.create else success");
                         window.myCart = cart;
-                        ipCookie("UltraCartShoppingCartID", cart.cartId, { expires:7, expirationUnit:"days"});
+                        ipCookie("UltraCartShoppingCartID", cart.cartId, { expires:1, expirationUnit:"hours"});
                         return cart;
                 })
                 .error(function(cart, status, headers, config) {

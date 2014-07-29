@@ -15,6 +15,7 @@ module.exports = function(app) {
             params: {_mid: merchantId}
         })
         .success(function(data, status, headers, config) {
+            console.dir(data);
             $scope.catalogDisplay = data;
         })
         .error(function(data, status, headers, config) {

@@ -18,6 +18,7 @@ module.exports = function(app) {
             cache: false
         })
         .success(function(data, status, headers, config) {
+            console.log(data);
             $scope.itemDisplay = data;
         })
         .error(function(data, status, headers, config) {
@@ -36,6 +37,7 @@ module.exports = function(app) {
             if(ipCookie("UltraCartShoppingCartID")) {
                 LoadCart.load().then(function(myCart) {
                     console.log("LoadCart.load() from ItemController");
+                    console.log(myCart.data);
                     $scope.cartDisplay = myCart.data;
                 });
             } else {

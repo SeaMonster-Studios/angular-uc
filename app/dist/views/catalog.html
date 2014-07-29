@@ -2,7 +2,7 @@
     <h2>This is the catalog.html view</h2>
     <ul>
         <li data-ng-repeat="item in catalogDisplay | limitTo:quantity" data-ng-click="showDetails(item.itemId)">
-            {{item.description}}
+            {{item.itemId}}
         </li>
     </ul>
 </section>

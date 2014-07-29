@@ -23858,6 +23858,7 @@ module.exports = function(app) {
             params: {_mid: merchantId}
         })
         .success(function(data, status, headers, config) {
+            console.dir(data);
             $scope.catalogDisplay = data;
         })
         .error(function(data, status, headers, config) {
@@ -24069,6 +24070,7 @@ module.exports = function(app) {
             cache: false
         })
         .success(function(data, status, headers, config) {
+            console.log(data);
             $scope.itemDisplay = data;
         })
         .error(function(data, status, headers, config) {
@@ -24087,6 +24089,7 @@ module.exports = function(app) {
             if(ipCookie("UltraCartShoppingCartID")) {
                 LoadCart.load().then(function(myCart) {
                     console.log("LoadCart.load() from ItemController");
+                    console.log(myCart.data);
                     $scope.cartDisplay = myCart.data;
                 });
             } else {
@@ -24159,6 +24162,7 @@ module.exports = function(app) {
         var cart = {};
         cart.create = function() {
             if(ipCookie("UltraCartShoppingCartID")) {
+
                 return $http({
                     url: cartUrl,
                     method: "GET",
@@ -24183,7 +24187,7 @@ module.exports = function(app) {
                 .success(function(cart, status, headers, config) {
                     console.log("inside cart.create else success");
                         window.myCart = cart;
-                        ipCookie("UltraCartShoppingCartID", cart.cartId, { expires:7, expirationUnit:"days"});
+                        ipCookie("UltraCartShoppingCartID", cart.cartId, { expires:1, expirationUnit:"hours"});
                         return cart;
                 })
                 .error(function(cart, status, headers, config) {
@@ -24209,10 +24213,11 @@ module.exports = function(app) {
         cart.load = function() {
             var deferred = $q.defer();
             if(ipCookie("UltraCartShoppingCartID")) {
+                var cookie = ipCookie("UltraCartShoppingCartID");
                 return $http({
                     url: cartUrl,
                     method: "GET",
-                    params: {_mid: merchantId, _cid: ipCookie("UltraCartShoppingCartID")},
+                    params: {_mid: merchantId, _cid: cookie},
                     dataType: "json"
                 })
                 .success(function(cart, status, headers, config) {
@@ -24235,7 +24240,7 @@ module.exports = function(app) {
                 .success(function(cart, status, headers, config) {
                     console.log("inside LoadCart else cart.load success");
                     window.myCart = cart;
-                    ipCookie("UltraCartShoppingCartID", cart.cartId, { expires:7, expirationUnit:"days"});
+                    ipCookie("UltraCartShoppingCartID", cart.cartId, { expires:1, expirationUnit:"hours"});
                     deferrd.resolve(myCart);
                 })
                 .error(function(cart, status, headers, config) {
