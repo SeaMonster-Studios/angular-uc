@@ -25,6 +25,7 @@ module.exports = function(app) {
             })
             .success(function(data, status, headers, config) {
                 console.log("Payment should be sent...I hope");
+                console.log(data);
                 console.dir(status);
                 console.dir(headers);
             })

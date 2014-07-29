@@ -26,9 +26,10 @@ module.exports = function(app) {
             }
         }
 
-        $scope.saveBilling = function(billing, shipping) {
+        $scope.saveBilling = function(billing, shipping, email) {
             $scope.billingInfo      = angular.copy(billing);
             $scope.shippingInfo     = angular.copy(shipping);
+            $scope.emailInfo        = angular.copy(email);
 
             myCart.billToFirstName  = $scope.billingInfo.fname;
             myCart.billToLastName   = $scope.billingInfo.lname;
@@ -45,6 +46,9 @@ module.exports = function(app) {
             myCart.shipToCity       = $scope.shippingInfo.city;
             myCart.shipToState      = $scope.shippingInfo.state;
             myCart.shipToPostalCode = $scope.shippingInfo.postal;
+
+            myCart.email            = $scope.emailInfo.email;
+            myCart.email            = $scope.emailInfo.confirm;
 
             var jCart = JSON.stringify(myCart);
             return $http({

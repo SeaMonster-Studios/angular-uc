@@ -13,7 +13,7 @@
     <label>Credit Card Expiration Date
         <select
             class="creditCardType"
-            data-ng-options="card for card in creditCard.month"
+            data-ng-options="card.name for card in creditCard.month"
             data-ng-model="cc.month">
         </select>
         <select

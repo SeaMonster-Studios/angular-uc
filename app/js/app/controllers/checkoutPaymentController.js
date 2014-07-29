@@ -12,18 +12,31 @@ module.exports = function(app) {
         var cart = {};
         var creditCard = {
             type   : ['AMEX', 'MasterCard', 'Visa'],
-            month  : ["January","February","March","April","May","June","July","August","September","October","November","December"],
+            month  : [
+                        {date: 1, name: "January"},
+                        {date: 2, name: "February"},
+                        {date: 3, name: "March"},
+                        {date: 4, name: "April"},
+                        {date: 5, name: "May"},
+                        {date: 6, name: "June"},
+                        {date: 7, name: "July"},
+                        {date: 8, name: "August"},
+                        {date: 9, name: "September"},
+                        {date: 10, name: "October"},
+                        {date: 11, name: "November"},
+                        {date: 12, name: "December"}
+                    ],
             year   : [2014,2015,2016,2017,2018,2019,2020,2021,2022,2023,2024,2025,2026,2027],
             number : 0,
             csv : 0
         }
+        console.log(creditCard);
         $scope.creditCard = creditCard;
 
         $scope.saveCC = function(cc) {
             $scope.ccInfo = angular.copy(cc);
-            console.log($scope.ccInfo);
 
-            myCart.creditCardExpirationMonth = $scope.ccInfo.month;
+            myCart.creditCardExpirationMonth = $scope.ccInfo.month.date;
             myCart.creditCardExpirationYear = $scope.ccInfo.year;
             myCart.creditCardType = $scope.ccInfo.type;
             myCart.creditCardVerificationNumber = $scope.ccInfo.csv;

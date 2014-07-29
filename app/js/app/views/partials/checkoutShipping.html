@@ -2,7 +2,11 @@
 <div class="checkoutShippingContainer">
     <h3>{{message}}</h3>
     <form novalidate method="POST">
-
+        <div class="emailFields">
+            <p>This is the email that will be used</p>
+            Email: <input type="email" data-ng-model="email.email"><br>
+            Email Confirm: <input type="email" data-ng-model="email.confirm">
+        </div>
         <div class="billingFields">
             <p>This is the billing address that will be used</p>
             First Name: <input type="text" ng-model="billing.fname" /><br>
@@ -24,7 +28,7 @@
             State: <input type="text" ng-model="shipping.state" /><br>
             Postal Code: <input type="text" ng-model="shipping.postal" /><br>
         </div>
-        <button data-ng-click="saveBilling(billing, shipping)">Save</button>
+        <button data-ng-click="saveBilling(billing, shipping, email)">Save</button>
     </form>
     <p>This is the billing address that will be used</p>
     <pre>{{billingInfo | json}}</pre>
