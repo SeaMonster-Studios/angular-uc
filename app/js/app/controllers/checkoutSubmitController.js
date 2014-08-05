@@ -26,8 +26,7 @@ module.exports = function(app) {
             .success(function(data, status, headers, config) {
                 console.log("Payment should be sent...I hope");
                 console.log(data);
-                console.dir(status);
-                console.dir(headers);
+                window.location.assign(data.redirectToUrl);
             })
             .error(function(data, status, headers, config) {
                 console.log("these were the erros when submitting payment: " + data);
