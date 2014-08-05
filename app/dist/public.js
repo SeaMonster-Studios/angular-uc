@@ -24044,6 +24044,9 @@ module.exports = function(app) {
             myCart.shippingMethod   = $scope.billingInfo.shippingMethod;
             myCart.paymentMethod    = $scope.billingInfo.paymentMethod;
 
+            myCart.shipToCountry    = "United States";
+            myCart.billToCountry    = "United States";
+
             var jCart = JSON.stringify(myCart);
             return $http({
                 url: cartUrl,
