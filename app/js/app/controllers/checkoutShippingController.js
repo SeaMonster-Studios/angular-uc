@@ -16,13 +16,16 @@ module.exports = function(app) {
             $scope.billingInfo = angular.copy(billing);
 
             $scope.shipping = {
-                fname    : $scope.billingInfo.fname,
-                lname    : $scope.billingInfo.lname,
-                address1 : $scope.billingInfo.address1,
-                address2 : $scope.billingInfo.address2,
-                city     : $scope.billingInfo.city,
-                state    : $scope.billingInfo.state,
-                postal   : $scope.billingInfo.postal
+                fname          : $scope.billingInfo.fname,
+                lname          : $scope.billingInfo.lname,
+                address1       : $scope.billingInfo.address1,
+                address2       : $scope.billingInfo.address2,
+                city           : $scope.billingInfo.city,
+                state          : $scope.billingInfo.state,
+                postal         : $scope.billingInfo.postal,
+                phone          : $scope.billingInfo.phone,
+                shippingMethod : $scope.billingInfo.shippingMethod,
+                paymentMethod  : $scope.billingInfo.paymentMethod
             }
         }
 
@@ -38,6 +41,7 @@ module.exports = function(app) {
             myCart.billToCity       = $scope.billingInfo.city;
             myCart.billToState      = $scope.billingInfo.state;
             myCart.billToPostalCode = $scope.billingInfo.postal;
+            myCart.billToPhone      = $scope.billingInfo.phone;
 
             myCart.shipToFirstName  = $scope.shippingInfo.fname;
             myCart.shipToLastName   = $scope.shippingInfo.lname;
@@ -46,9 +50,13 @@ module.exports = function(app) {
             myCart.shipToCity       = $scope.shippingInfo.city;
             myCart.shipToState      = $scope.shippingInfo.state;
             myCart.shipToPostalCode = $scope.shippingInfo.postal;
+            myCart.shipToPhone      = $scope.shippingInfo.phone;
 
             myCart.email            = $scope.emailInfo.email;
             myCart.email            = $scope.emailInfo.confirm;
+
+            myCart.shippingMethod   = $scope.billingInfo.shippingMethod;
+            myCart.paymentMethod    = $scope.billingInfo.paymentMethod;
 
             var jCart = JSON.stringify(myCart);
             return $http({

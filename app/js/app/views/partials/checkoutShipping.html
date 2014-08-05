@@ -9,25 +9,29 @@
         </div>
         <div class="billingFields">
             <p>This is the billing address that will be used</p>
-            First Name: <input type="text" ng-model="billing.fname" /><br>
-            Last Name: <input type="text" ng-model="billing.lname" /><br>
-            Address 1: <input type="text" ng-model="billing.address1" /><br>
-            Address 2: <input type="text" ng-model="billing.address2" /><br>
-            City: <input type="text" ng-model="billing.city" /><br>
-            State: <input type="text" ng-model="billing.state" /><br>
-            Postal Code: <input type="text" ng-model="billing.postal" /><br>
+            First Name: <input type="text" data-ng-model="billing.fname" /><br>
+            Last Name: <input type="text" data-ng-model="billing.lname" /><br>
+            Address 1: <input type="text" data-ng-model="billing.address1" /><br>
+            Address 2: <input type="text" data-ng-model="billing.address2" /><br>
+            City: <input type="text" data-ng-model="billing.city" /><br>
+            State: <input type="text" data-ng-model="billing.state" /><br>
+            Postal Code: <input type="text" data-ng-model="billing.postal" /><br>
+            Phone: <input type="text" data-ng-model="billing.phone" /><br>
         </div>
         Shipping is same as billing <input type="checkbox" data-ng-click="sameAddress(billing)">
         <div class="shippingFields">
             <p>This is the shipping address form</p>
-            First Name: <input type="text" ng-model="shipping.fname" /><br>
-            Last Name: <input type="text" ng-model="shipping.lname" /><br>
-            Address 1: <input type="text" ng-model="shipping.address1" /><br>
-            Address 2: <input type="text" ng-model="shipping.address2" /><br>
-            City: <input type="text" ng-model="shipping.city" /><br>
-            State: <input type="text" ng-model="shipping.state" /><br>
-            Postal Code: <input type="text" ng-model="shipping.postal" /><br>
+            First Name: <input type="text" data-ng-model="shipping.fname" /><br>
+            Last Name: <input type="text" data-ng-model="shipping.lname" /><br>
+            Address 1: <input type="text" data-ng-model="shipping.address1" /><br>
+            Address 2: <input type="text" data-ng-model="shipping.address2" /><br>
+            City: <input type="text" data-ng-model="shipping.city" /><br>
+            State: <input type="text" data-ng-model="shipping.state" /><br>
+            Postal Code: <input type="text" data-ng-model="shipping.postal" /><br>
+            Phone: <input type="text" data-ng-model="shipping.phone" /><br>
         </div>
+        Shipping Method: <input type="text" data-ng-model="billing.shippingMethod" /><br>
+        Pyament Method: <input type="text" value="Credit Card" data-ng-model="billing.paymentMethod" /><br>
         <button data-ng-click="saveBilling(billing, shipping, email)">Save</button>
     </form>
     <p>This is the billing address that will be used</p>
