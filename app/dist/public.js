@@ -23704,6 +23704,7 @@ require("./../../bower_components/angular-resource/angular-resource.js");
 require("./../../bower_components/angular-cookies/angular-cookies.js");
 require("./../../bower_components/angular-cookie/angular-cookie.js");
 
+
 var ucApp = angular.module("ucApp", ["ngRoute", "ngCookies", "ipCookie"]);
 
 require("./controllers/catalogController.js")(ucApp);

@@ -4,6 +4,7 @@ require("angular-resource");
 require("angular-cookies");
 require("angular-cookie");
 
+
 var ucApp = angular.module("ucApp", ["ngRoute", "ngCookies", "ipCookie"]);
 
 require("./controllers/catalogController.js")(ucApp);

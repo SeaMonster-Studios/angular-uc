@@ -18,7 +18,7 @@ module.exports = function(grunt) {
                 ui: "bdd"
             },
             all: {
-                src: ["tests/api/**/*.js"]
+                src: ["tests/js/**/*.js"]
             }
         },
         clean: ["app/dist"],
@@ -26,20 +26,28 @@ module.exports = function(grunt) {
             main: {
                 files: [
                     {
-                        expand: true,
-                        cwd: "app/",
-                        src: ["css/**/*.css", "*.html", "img/**/*.svg", "!Gruntfile.js", "fonts/**/*"],
-                        dest: "app/dist/",
-                        flatten: false,
-                        filter: "isFile"
+                        expand  : true,
+                        cwd     : "app/",
+                        src     : ["css/**/*.css", "*.html", "img/**/*.svg", "!Gruntfile.js", "fonts/**/*"],
+                        dest    : "app/dist/",
+                        flatten : false,
+                        filter  : "isFile"
                     },
                     {
-                        expand: true,
-                        cwd: "app/js/app/",
-                        src: ["views/**/*.html"],
-                        dest: "app/dist/",
-                        flatten: false,
-                        filter: "isFile"
+                        expand  : true,
+                        cwd     : "app/js/app/",
+                        src     : ["views/**/*.html"],
+                        dest    : "app/dist/",
+                        flatten : false,
+                        filter  : "isFile"
+                    },
+                    {
+                        expand  : true,
+                        cwd     : "tests/",
+                        src     : ["js/**/*.js", "**/*.html", "mocha/**/*.js", "mocha/**/*.css", "chai/**/*.js"],
+                        dest    : "app/dist/tests",
+                        flatten : false,
+                        filter  : "isFile"
                     }
                 ]
             }
@@ -95,7 +103,7 @@ module.exports = function(grunt) {
         },
         watch: {
             scripts: {
-                files: ["app/js/**/*.js", "app/bower_components/**/*.js", "test/**/*.js", "app/**/*.html", "!app/dist/**/*.html"],
+                files: ["app/js/**/*.js", "app/bower_components/**/*.js", "tests/**/*.js", "tests/**/*.html", "app/**/*.html", "!app/dist/**/*.html"],
                 tasks: ["build"]
             },
             source: {
@@ -119,7 +127,7 @@ module.exports = function(grunt) {
     grunt.registerTask('server', 'serve');
     grunt.registerTask('test:acceptance',['express:dev','casper']);
     grunt.registerTask('test:api','simplemocha');
-    grunt.registerTask('test',['test:acceptance','test:api']);
+    grunt.registerTask('test',['test:api']);
     grunt.registerTask('default', ['jshint']);
     grunt.registerTask('build',['clean', 'browserify', 'copy:main', 'sass' ]);
 };// end module.exports
