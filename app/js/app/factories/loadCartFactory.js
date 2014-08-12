@@ -39,7 +39,7 @@ module.exports = function(app) {
                     console.log("inside LoadCart else cart.load success");
                     window.myCart = cart;
                     ipCookie("UltraCartShoppingCartID", cart.cartId, { expires:1, expirationUnit:"hours"});
-                    deferrd.resolve(myCart);
+                    deferred.resolve(myCart);
                 })
                 .error(function(cart, status, headers, config) {
                     console.log("There was an error: " + cart);

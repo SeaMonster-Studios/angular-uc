@@ -18,6 +18,7 @@ require("./controllers/checkoutSubmitController")(ucApp);
 require("./factories/loadCartFactory")(ucApp);
 require("./factories/createCartFactory")(ucApp);
 require("./factories/addItemFactory")(ucApp);
+//require("./factories/checkoutShippingFactory")(ucApp);
 
 
 ucApp.config(["$routeProvider", function($routeProvider) {

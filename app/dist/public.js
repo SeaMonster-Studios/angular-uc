@@ -23718,6 +23718,7 @@ require("./controllers/checkoutSubmitController")(ucApp);
 require("./factories/loadCartFactory")(ucApp);
 require("./factories/createCartFactory")(ucApp);
 require("./factories/addItemFactory")(ucApp);
+//require("./factories/checkoutShippingFactory")(ucApp);
 
 
 ucApp.config(["$routeProvider", function($routeProvider) {
@@ -23745,7 +23746,7 @@ ucApp.config(["$routeProvider", function($routeProvider) {
             redirectTo: "/"
         });
 }]); // end ucApp.config
-},{"./../../bower_components/angular-cookie/angular-cookie.js":3,"./../../bower_components/angular-cookies/angular-cookies.js":4,"./../../bower_components/angular-resource/angular-resource.js":5,"./../../bower_components/angular-route/angular-route.js":6,"./../../bower_components/angular/angular":7,"./controllers/cartController":9,"./controllers/catalogController.js":10,"./controllers/checkoutItemsController":11,"./controllers/checkoutPaymentController":12,"./controllers/checkoutShippingController":13,"./controllers/checkoutSubmitController":14,"./controllers/homeController.js":15,"./controllers/itemController.js":16,"./factories/addItemFactory":17,"./factories/createCartFactory":18,"./factories/loadCartFactory":19}],9:[function(require,module,exports){
+},{"./../../bower_components/angular-cookie/angular-cookie.js":3,"./../../bower_components/angular-cookies/angular-cookies.js":4,"./../../bower_components/angular-resource/angular-resource.js":5,"./../../bower_components/angular-route/angular-route.js":6,"./../../bower_components/angular/angular":7,"./controllers/cartController":9,"./controllers/catalogController.js":10,"./controllers/checkoutItemsController":11,"./controllers/checkoutPaymentController":12,"./controllers/checkoutShippingController":13,"./controllers/checkoutSubmitController":14,"./controllers/homeController.js":15,"./controllers/itemController.js":16,"./factories/addItemFactory":17,"./factories/createCartFactory":19,"./factories/loadCartFactory":20}],9:[function(require,module,exports){
 "use strict";
 var baseUrl    = require("../../../../api/db");
 var cartUrl    = baseUrl.cartUrl;
@@ -24105,6 +24106,10 @@ module.exports = function(app) {
                 console.log("these were the erros when submitting payment: " + data);
             });// end $http.get
         }// end $scope.submitOrder()
+
+        $scope.test = function() {
+            console.log($scope.message);
+        }
     });// end app.controller("CheckoutSubmitController")
 };// end module.exports
 },{"../../../../api/db":1}],15:[function(require,module,exports){
@@ -24222,6 +24227,96 @@ var baseUrl    = require("../../../../api/db");
 var cartUrl    = baseUrl.cartUrl;
 var itemUrl    = baseUrl.itemUrl;
 var merchantId = baseUrl.merchantId;
+var checkoutUrl = baseUrl.checkoutUrl;
+
+module.exports = function(app) {
+    app.factory("AddShipping", function($http, $location, $q, ipCookie) {
+        var cart = {};
+        cart.shipping = function() {
+            var deferred = $q.defer();
+
+            $scope.sameAddress = function(billing) {
+                console.log("inside of sameAddress()");
+                $scope.billingInfo = angular.copy(billing);
+
+                $scope.shipping = {
+                    fname          : $scope.billingInfo.fname,
+                    lname          : $scope.billingInfo.lname,
+                    address1       : $scope.billingInfo.address1,
+                    address2       : $scope.billingInfo.address2,
+                    city           : $scope.billingInfo.city,
+                    state          : $scope.billingInfo.state,
+                    postal         : $scope.billingInfo.postal,
+                    phone          : $scope.billingInfo.phone,
+                    shippingMethod : $scope.billingInfo.shippingMethod,
+                    paymentMethod  : $scope.billingInfo.paymentMethod
+                }
+            }
+
+            $scope.saveBilling = function(billing, shipping, email) {
+                $scope.billingInfo      = angular.copy(billing);
+                $scope.shippingInfo     = angular.copy(shipping);
+                $scope.emailInfo        = angular.copy(email);
+
+                myCart.billToFirstName  = $scope.billingInfo.fname;
+                myCart.billToLastName   = $scope.billingInfo.lname;
+                myCart.billToAddress1   = $scope.billingInfo.address1;
+                myCart.billToAddress2   = $scope.billingInfo.address2;
+                myCart.billToCity       = $scope.billingInfo.city;
+                myCart.billToState      = $scope.billingInfo.state;
+                myCart.billToPostalCode = $scope.billingInfo.postal;
+                myCart.billToPhone      = $scope.billingInfo.phone;
+
+                myCart.shipToFirstName  = $scope.shippingInfo.fname;
+                myCart.shipToLastName   = $scope.shippingInfo.lname;
+                myCart.shipToAddress1   = $scope.shippingInfo.address1;
+                myCart.shipToAddress2   = $scope.shippingInfo.address2;
+                myCart.shipToCity       = $scope.shippingInfo.city;
+                myCart.shipToState      = $scope.shippingInfo.state;
+                myCart.shipToPostalCode = $scope.shippingInfo.postal;
+                myCart.shipToPhone      = $scope.shippingInfo.phone;
+
+                myCart.email            = $scope.emailInfo.email;
+                myCart.email            = $scope.emailInfo.confirm;
+
+                myCart.shippingMethod   = $scope.billingInfo.shippingMethod;
+                myCart.paymentMethod    = $scope.billingInfo.paymentMethod;
+
+                myCart.shipToCountry    = "United States";
+                myCart.billToCountry    = "United States";
+
+                var jCart = JSON.stringify(myCart);
+                return $http({
+                    url: cartUrl,
+                    method: "POST",
+                    data: jCart,
+                    params: {_mid: merchantId, _cid: ipCookie("UltraCartShoppingCartID")},
+                    dataType: "json",
+                    cache: false
+                })
+                .success(function(cart, status, headers, config) {
+                    console.log("inside success for saving billing info factory");
+                    window.myCart = cart;
+                    //return cart;
+                    deferrd.resolve(myCart);
+                })
+                .error(function(cart, status, headers, config) {
+                    console.log("there was an error with saveBilling: " + cart);
+                    deferred.reject();
+                }); // end $http(post)
+                return deferred.promise;
+            }
+        };// end cart.shipping()
+        return cart;
+        return deferred.promise;
+    });// end app.factory("AddShipping")
+};// end module.exports
+},{"../../../../api/db":1}],19:[function(require,module,exports){
+"use strict";
+var baseUrl    = require("../../../../api/db");
+var cartUrl    = baseUrl.cartUrl;
+var itemUrl    = baseUrl.itemUrl;
+var merchantId = baseUrl.merchantId;
 
 module.exports = function(app) {
     app.factory("CreateCart", function($http, $location, ipCookie) {
@@ -24265,7 +24360,7 @@ module.exports = function(app) {
     }); // end app.facotry("CreateCart")
 }; // end module.exports
 
-},{"../../../../api/db":1}],19:[function(require,module,exports){
+},{"../../../../api/db":1}],20:[function(require,module,exports){
 "use strict";
 var baseUrl    = require("../../../../api/db");
 var cartUrl    = baseUrl.cartUrl;
@@ -24307,7 +24402,7 @@ module.exports = function(app) {
                     console.log("inside LoadCart else cart.load success");
                     window.myCart = cart;
                     ipCookie("UltraCartShoppingCartID", cart.cartId, { expires:1, expirationUnit:"hours"});
-                    deferrd.resolve(myCart);
+                    deferred.resolve(myCart);
                 })
                 .error(function(cart, status, headers, config) {
                     console.log("There was an error: " + cart);
@@ -24320,4 +24415,4 @@ module.exports = function(app) {
         return deferred.promise;
     }); // end app.factory("LoadCart")
 };// end module.exports
-},{"../../../../api/db":1}]},{},[8,9,10,11,12,13,14,15,16,17,18,19]);
+},{"../../../../api/db":1}]},{},[8,9,10,11,12,13,14,15,16,17,18,19,20]);

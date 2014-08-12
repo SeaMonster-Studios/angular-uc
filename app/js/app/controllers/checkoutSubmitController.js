@@ -32,5 +32,9 @@ module.exports = function(app) {
                 console.log("these were the erros when submitting payment: " + data);
             });// end $http.get
         }// end $scope.submitOrder()
+
+        $scope.test = function() {
+            console.log($scope.message);
+        }
     });// end app.controller("CheckoutSubmitController")
 };// end module.exports
