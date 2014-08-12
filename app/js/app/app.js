@@ -4,12 +4,22 @@ require("angular-resource");
 require("angular-cookies");
 require("angular-cookie");
 
+
 var ucApp = angular.module("ucApp", ["ngRoute", "ngCookies", "ipCookie"]);
 
 require("./controllers/catalogController.js")(ucApp);
 require("./controllers/itemController.js")(ucApp);
 require("./controllers/homeController.js")(ucApp);
-require("./controllers/cartController.js")(ucApp);
+require("./controllers/cartController")(ucApp);
+require("./controllers/checkoutItemsController")(ucApp);
+require("./controllers/checkoutShippingController")(ucApp);
+require("./controllers/checkoutPaymentController")(ucApp);
+require("./controllers/checkoutSubmitController")(ucApp);
+require("./factories/loadCartFactory")(ucApp);
+require("./factories/createCartFactory")(ucApp);
+require("./factories/addItemFactory")(ucApp);
+//require("./factories/checkoutShippingFactory")(ucApp);
+
 
 ucApp.config(["$routeProvider", function($routeProvider) {
     $routeProvider
@@ -28,6 +38,9 @@ ucApp.config(["$routeProvider", function($routeProvider) {
         .when("/cart", {
             templateUrl: "views/cart.html",
             controller: "CartController"
+        })
+        .when("/checkout", {
+            templateUrl: "views/checkout.html"
         })
         .otherwise({
             redirectTo: "/"
