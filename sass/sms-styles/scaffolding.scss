@@ -1,12 +1,16 @@
 $small-mobile: new-breakpoint(max-width 320px 4);
-$mobile: new-breakpoint(min-width 320px 6);
-$tablet: new-breakpoint(min-width 600px 12);
+$mobile: new-breakpoint(min-width 320px max-width 599px 4);
+$tablet: new-breakpoint(min-width 600px max-width 1079px 12);
 $desktop: new-breakpoint(min-width 1080px 12);
 
 .smsuc-wrap {
   	//$border-box-sizing: false !global; //Global Border Box sizing
   	@include fill-parent;
-  	@include media($tablet) {
+  	@include media($mobile) {
+      @include fill-parent;
+    }
+    @include media($tablet) {
+      @include fill-parent;
   	}
   	@include media($desktop) {
   		@include fill-parent;
@@ -16,7 +20,11 @@ $desktop: new-breakpoint(min-width 1080px 12);
 .smsuc-catalog{
 	//$border-box-sizing: false !global; //Global Border Box sizing
   	@include fill-parent;
+    @include media($mobile) {
+      @include fill-parent;
+    }
   	@include media($tablet) {
+      @include fill-parent;
   	}
   	@include media($desktop) {
   		@include fill-parent;
