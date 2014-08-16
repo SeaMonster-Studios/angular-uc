@@ -1,40 +1,78 @@
 .smsuc-catalog {
     @include fill-parent;
     @include outer-container;
-    .single-item.four-col {
-        @include span-columns(4);
-        @include omega(n+0);
-        @include pad(1em 1em 1em 1em);
-        @include media($mobile) {
+    .single-item{
+        &.four-col {
             @include span-columns(4);
             @include omega(n+0);
-        }
-        @include media($tablet ) {
-            @include span-columns(6);
-            @include omega(2n+0);
-        }
-        @include media($desktop) {
-            //@include fill-parent;
-            @include span-columns(3);
-            @include omega(4n+0);
-            @include pad(1em 0.5em 1em 0.5em);
-        }
-    } //end .single-item
-    .single-item.three-col {
-        @include span-columns(4);
-        @include omega(n+0);
-        @include pad(1em 1em 1em 1em);
-        @include media($mobile) {
+            @include pad(1em 1em 1em 1em);
+            @include media($mobile) {
+                @include span-columns(4);
+                @include omega(n+0);
+            }
+            @include media($tablet ) {
+                @include span-columns(6);
+                @include omega(2n+0);
+            }
+            @include media($desktop) {
+                //@include fill-parent;
+                @include span-columns(3);
+                @include omega(4n+0);
+                @include pad(1em 0.5em 1em 0.5em);
+            }
+        } //end .single-item.four-col
+        &.three-col {
             @include span-columns(4);
+            @include omega(n+0);
+            @include pad(1em 1em 1em 1em);
+            @include media($mobile) {
+                @include span-columns(4);
+            }
+            @include media($tablet) {
+                @include span-columns(6);
+            }
+            @include media($desktop) {
+                @include fill-parent;
+                @include span-columns(4);
+                @include omega(3n+0);
+                @include pad(1em 0.5em 1em 0.5em);
+            }
+        } //end .single-item.three-col
+        &.two-col {
+            @include span-columns(4);
+            @include omega(n+0);
+            @include pad(1em 1em 1em 1em);
+            @include media($mobile) {
+                @include span-columns(4);
+            }
+            @include media($tablet) {
+                @include span-columns(6);
+            }
+            @include media($desktop) {
+                @include fill-parent;
+                @include span-columns(6);
+                @include omega(2n+0);
+                @include pad(1em 0.5em 1em 0.5em);
+            }
+        } //end .single-item.two-col
+
+        /* Single Item Styles*/
+
+        .defaultImage{
+            margin-bottom: $base-font-size;
         }
-        @include media($tablet) {
+        .descritpion{
+
+        }
+        .cost{
+            font-size: $base-font-size * 1.5; // 16 * 2 = 32px
+            font-weight: 700;
+        }
+        .readMore{
             @include span-columns(6);
         }
-        @include media($desktop) {
-            @include fill-parent;
-            @include span-columns(4);
-            @include omega(3n+0);
-            @include pad(1em 0.5em 1em 0.5em);
+        .addToCart{
+            @include span-columns(6);
         }
     } //end .single-item
 } //end .smsuc-catalog
