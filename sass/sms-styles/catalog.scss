@@ -1,0 +1,16 @@
+.smsuc-catalog {
+    @include fill-parent;
+    .single-item {
+        @include span-columns(3);
+        @include media($mobile) {
+            @include span-columns(3);
+        }
+        @include media($tablet) {
+            @include span-columns(3);
+        }
+        @include media($desktop) {
+            @include fill-parent;
+            @include span-columns(3);
+        }
+    } //end .single-item
+} //end .smsuc-catalog

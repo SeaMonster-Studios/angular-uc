@@ -1,0 +1,14 @@
+<section>
+<h2>This is the cart.html view</h2>
+    <div>
+        <h4>This is the cart</h4>
+        <p>Cart ID: {{cartDisplay.cartId}}</p>
+        <p>Cart Total: {{cartDisplay.total | currency}}</p>
+        <p>Cart Items: {{cartDisplay.items.length}}</p>
+    </div>
+    <div>
+        <button data-ng-click="addItem(displayItem.itemId)">Add to cart</button>
+        <p>{{displayItem.itemId}}</p>
+        <a data-ng-href="#/checkout">Checkout</a>
+    </div>
+</section>

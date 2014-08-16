@@ -1,0 +1,15 @@
+<section class="smsuc-item">
+    <h2>{{message}}</h2>
+    <div>
+        <p>{{itemDisplay.description}}</p>
+        <p>{{itemDisplay.cost}}</p>
+        <button data-ng-click="addItem(itemDisplay.itemId)">Add to cart</button>
+        <button data-ng-click="goToCheckout()">Go to Checkout</button>
+    </div>
+    <div>
+        <h4>This is the cart</h4>
+        <p>Cart ID: {{cartDisplay.cartId}}</p>
+        <p>Cart Total: {{cartDisplay.total | currency}}</p>
+        <p>Cart Items: {{cartDisplay.items.length}}</p>
+    </div>
+</section>
