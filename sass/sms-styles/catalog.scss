@@ -2,6 +2,7 @@
     @include fill-parent;
     @include outer-container;
     .single-item{
+
         &.four-col {
             @include span-columns(4);
             @include omega(n+0);
@@ -55,7 +56,7 @@
                 @include pad(1em 0.5em 1em 0.5em);
             }
         } //end .single-item.two-col
-
+        @include transition (all 0.3s ease-in-out);
         /* Single Item Styles*/
 
         .defaultImage{

@@ -1,0 +1,14 @@
+@include font-face(Open Sans, 'fonts/Light/OpenSans-Light', 300);
+@include font-face(Open Sans, 'fonts/LightItalic/OpenSans-LightItalic', 300, italic);
+@include font-face(Open Sans, 'fonts/Regular/OpenSans-Regular', 400);
+@include font-face(Open Sans, 'fonts/Italic/OpenSans-Italic', 400, italic);
+@include font-face(Open Sans, 'fonts/SemiBold/OpenSans-SemiBold', 600);
+@include font-face(Open Sans, 'fonts/SemiBoldItalic/OpenSans-SemiBoldItalic', 600, italic);
+@include font-face(Open Sans, 'fonts/Bold/OpenSans-Bold', 700);
+@include font-face(Open Sans, 'fonts/BoldItalic/OpenSans-BoldItalic', 700, italic);
+@include font-face(Open Sans, 'fonts/ExtraBold/OpenSans-ExtraBold', 800);
+@include font-face(Open Sans, 'fonts/ExtraBoldItalicx/OpenSans-ExtraBoldItalic', 800, italic);
+
+.smsuc-wrap *{
+	font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
