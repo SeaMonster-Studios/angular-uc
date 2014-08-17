@@ -1,8 +1,11 @@
 .smsuc-checkout-messages{
+	@include fill-parent;
+    @include outer-container;
+	background-color: #fcfcfc;
+    margin-bottom: em(80px);
 	.success{
 		@include flash(#e6efc2);
 		border: 1px solid darken(#e6efc2, 20);
-		margin: 1em 1em 1em 1em;
 		@include border-top-radius(2px);
 		@include border-bottom-radius(2px);
 		@include border-left-radius(2px);
@@ -11,7 +14,6 @@
 	.error{
 		@include flash(#fbe3e4);
 		border: 1px solid darken(#fbe3e4, 10);
-		margin: 1em 1em 1em 1em;
 		@include border-top-radius(2px);
 		@include border-bottom-radius(2px);
 		@include border-left-radius(2px);
@@ -21,7 +23,6 @@
 	.notice{
 		@include flash(#fff6bf);
 		border: 1px solid darken(#fff6bf, 40);
-		margin: 1em 1em 1em 1em;
 		@include border-top-radius(2px);
 		@include border-bottom-radius(2px);
 		@include border-left-radius(2px);
@@ -31,7 +32,6 @@
 	.alert{
 		@include flash(#fff6bf);
 		border: 1px solid darken(#fff6bf, 40);
-		margin: 1em 1em 1em 1em;
 		@include border-top-radius(2px);
 		@include border-bottom-radius(2px);
 		@include border-left-radius(2px);

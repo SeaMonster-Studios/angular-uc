@@ -4,6 +4,21 @@
     @include outer-container;
     .checkoutShippingContainer{
         @include outer-container;
+        .emailFields{
+            @include transition (all 0.3s ease-in-out);
+            @include span-columns(4);
+            @include pad(1em 0.5em 1em 0.5em);
+            @include media($mobile) {
+                @include span-columns(4);
+            }
+            @include media($tablet ) {
+                @include span-columns(6);            
+            }
+            @include media($desktop) {
+                @include span-columns(6);
+                @include pad(1em 0.5em 1em 0.5em);
+            }
+        }
         .billingFields{
             @include transition (all 0.3s ease-in-out);
         	@include span-columns(4);

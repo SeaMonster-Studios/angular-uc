@@ -12,3 +12,15 @@
 .smsuc-wrap *{
 	font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
+
+pre{
+	@include flash(#e6efc2);
+	border: 1px solid darken(#e6efc2, 20);
+	margin: 1em 1em 1em 1em;
+	@include border-top-radius(2px);
+	@include border-bottom-radius(2px);
+	@include border-left-radius(2px);
+	@include border-right-radius(2px);
+	font-family: 'SourceCodePro', 'Menlo', 'Consolas', Courier, monospace !important;
+	font-weight: normal;
+}
