@@ -78,6 +78,10 @@ module.exports = function(grunt) {
                     "app/dist/style.css" : "sass/style.scss",
                     "app/dist/application.css" : "sass/application.scss"
                     // "app/dist/wes.css" : "sass/wes.scss"
+                },
+                options: {
+                    includePaths: require('node-bourbon').includePaths,
+                    includePaths: require('node-neat').includePaths
                 }
             }
         },
