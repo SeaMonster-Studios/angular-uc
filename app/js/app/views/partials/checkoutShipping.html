@@ -9,7 +9,7 @@
         </div>
         <div class="billingFields">
             <h3>Billing Address</h3>
-            <label for="billingFirstName">First Name <input type="text" placeholder="First Name" id="billingFirstName" data-ng-model="billing.fname" required></label><br>
+            <label for="billingFirstName">First Name <input type="text" placeholder="First Name" id="billingFirstName" data-ng-change="updateTest(billingfname)" data-ng-model="billingfname" required></label><br>
             <label for="billingLastName">Last Name <input type="text" placeholder="Last Name" id="billingLastName" data-ng-model="billing.lname" required></label><br>
             <label for="billingAddress1">Address <input type="text" placeholder="Billing Address" id="billingAddress1" data-ng-model="billing.address1" required></label><br>
             <label for="billingAddress2">Apartment/Suite <input type="text" placeholder="Apartment/Suite" id="billingAddress2" data-ng-model="billing.address2" required></label><br>
@@ -18,7 +18,7 @@
             <label for="billingCountry">Country <input type="text" placeholder="State" id=="billingCountry" data-ng-model="billing.country" required></label><br>
             <label for="billingPostalCode">Postal Code <input type="text" placeholder="Postal Code" id="billingPostalCode" data-ng-model="billing.postal" required></label><br>
             <label for="billingPhone">Phone <input type="tel" placeholder="000-000-0000" id="billingPhone"  data-ng-model="billing.phone" required></label><br>
-            <label for="billing">Shipping is same as billing <input type="checkbox" data-ng-click="sameAddress(billing)">
+            <label for="billing">Shipping is same as billing <input type="checkbox" data-ng-click="sameAddress(billing, email)">
         </div>
 
         <div class="shippingFields">

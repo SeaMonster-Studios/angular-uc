@@ -11,9 +11,10 @@ module.exports = function(app) {
 
         $scope.billingInfo = {};
         var cart = {};
-        $scope.sameAddress = function(billing) {
+        $scope.sameAddress = function(billing, email) {
             console.log("inside of sameAddress()");
             $scope.billingInfo = angular.copy(billing);
+            $scope.emailInfo = angular.copy(email);
 
             $scope.shipping = {
                 fname          : $scope.billingInfo.fname,
@@ -27,9 +28,10 @@ module.exports = function(app) {
                 shippingMethod : $scope.billingInfo.shippingMethod,
                 paymentMethod  : $scope.billingInfo.paymentMethod
             }
-        }
+        },
 
-        $scope.saveBilling = function(billing, shipping, email) {
+        $scope.saveBilling = function() {
+            console.log("inside the save()");
             $scope.billingInfo      = angular.copy(billing);
             $scope.shippingInfo     = angular.copy(shipping);
             $scope.emailInfo        = angular.copy(email);
@@ -79,7 +81,22 @@ module.exports = function(app) {
                 console.log("there was an error with saveBilling: " + cart);
             }); // end $http(post)
             return cart;
+        },// end $scope.saveBilling()
+
+        $scope.talk = function() {
+            console.log(ted);
+            return ted;
+        },
+
+        $scope.updateTest = function(billingfname) {
+            console.log("inside of updateTest");
+            myCart.billToFirstName = billingfname;
         }
+
+        $scope.$on('cartEvent', function(e) {
+            $scope.$parent.getCart = ($scope.talk())
+        });
+
         return cart;
     });// end app.controller("CheckoutShippingController")
 }; // end module.exports

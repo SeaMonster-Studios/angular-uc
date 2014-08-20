@@ -7,6 +7,14 @@ var checkoutUrl = baseUrl.checkoutUrl;
 
 module.exports = function(app) {
     app.controller("CheckoutSubmitController", function($scope, $http, $location, $q, ipCookie, CreateCart, LoadCart) {
+        $scope.getCart = "";
+
+        $scope.get = function() {
+            $scope.$broadcast('cartEvent');
+            console.log("this worked?");
+            return $scope.getCart;
+        }
+
 
         $scope.submitOrder = function() {
             var checkoutRequest = {
@@ -26,7 +34,7 @@ module.exports = function(app) {
             .success(function(data, status, headers, config) {
                 console.log("Payment should be sent...I hope");
                 console.log(data);
-                window.location.assign(data.redirectToUrl);
+                //window.location.assign(data.redirectToUrl);
             })
             .error(function(data, status, headers, config) {
                 console.log("these were the erros when submitting payment: " + data);
