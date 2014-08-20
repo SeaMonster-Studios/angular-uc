@@ -26,12 +26,12 @@ module.exports = function(grunt) {
             main: {
                 files: [
                     {
-                        expand  : true,
-                        cwd     : "app/",
-                        src     : ["css/**/*.css", "*.html", "img/**/*.svg", "!Gruntfile.js", "fonts/**/*"],
-                        dest    : "app/dist/",
-                        flatten : false,
-                        filter  : "isFile"
+                        expand: true,
+                        cwd: "app/",
+                        src: ["css/**/*.css", "*.html", "img/**/*.svg", "!Gruntfile.js"],
+                        dest: "app/dist/",
+                        flatten: false,
+                        filter: "isFile"
                     },
                     {
                         expand  : true,
@@ -46,6 +46,14 @@ module.exports = function(grunt) {
                         cwd     : "tests/",
                         src     : ["js/**/*.js", "**/*.html", "mocha/**/*.js", "mocha/**/*.css", "chai/**/*.js"],
                         dest    : "app/dist/tests",
+                        flatten : false,
+                        filter  : "isFile"
+                    },
+                    {
+                        expand  : true,
+                        cwd     : "sass/",
+                        src     : ["fonts/**"],
+                        dest    : "app/dist",
                         flatten : false,
                         filter  : "isFile"
                     }
@@ -65,7 +73,13 @@ module.exports = function(grunt) {
         sass: {
             dist: {
                 files: {
-                    "app/dist/style.css" : "sass/style.scss"
+                    "app/dist/style.css" : "sass/style.scss",
+                    "app/dist/application.css" : "sass/application.scss"
+                    // "app/dist/wes.css" : "sass/wes.scss"
+                },
+                options: {
+                    includePaths: require('node-bourbon').includePaths,
+                    includePaths: require('node-neat').includePaths
                 }
             }
         },

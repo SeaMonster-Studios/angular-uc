@@ -1,11 +1,39 @@
-<h4>Look at me! I'm an include called checkoutItems.html</h4>
+
 <div class="checkoutItemsContainer">
-    <div data-ng-repeat="item in loadCart.items">
+   <!--  <div data-ng-repeat="item in loadCart.items">
         <p>Item: {{item.itemId}}</p>
         <p>cost: {{item.unitCost}}</p>
         <button data-ng-click="removeItem(item.position)">Remove Item</button>
-    </div>
-    <p>Subtotal: {{loadCart.subtotal}}</p>
+    </div> -->
+
+	<table class="cartTable" cellspacing="0" cellpadding="0">
+		<thead>
+			<tr >
+				<th><h5>Shopping Cart</h5></th><th>&nbsp</th><th>Price</th><th>Quantity</th>
+			</tr>
+		<thead>
+		<tbody>
+			<tr data-ng-repeat="item in loadCart.items">
+				<td class="cart-column image"><img class="defaultImage" src="{{item.defaultImageUrl}}" alt="" /></td>
+				<td class="cart-column description">{{item.description}}<br><a class="removeItem" data-ng-click="removeItem(item.position)">Remove Item</a></td>
+				<td class="cart-column price">{{item.unitCost}}</td>
+				<td class="cart-column quantity">{{item.quantity}}</td>
+			</tr>
+		</tbody>
+  	</table>
+    <dl class="cartTotals">
+	  	<dt>Subtotal</dt>
+	    <dd>{{loadCart.subtotal}}</dd>
+	  	<dt>Coupons</dt>
+	    <dd>{{loadCart.subtotal}}</dd>
+	    <dt>Shipping</dt>
+	    <dd>{{loadCart.subtotal}}</dd>
+	  	<dt>Sales Tax</dt>
+	    <dd>{{loadCart.tax}}</dd>
+	    <dt>Total</dt>
+	    <dd>{{loadCart.total}}</dd>
+	</dl>
+
     <button data-ng-click="keepShopping()">Keep Shopping</button>
 </div>
 <!-- end .checkoutItemsContainer -->

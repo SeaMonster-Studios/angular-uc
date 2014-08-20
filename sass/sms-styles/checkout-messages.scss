@@ -1,0 +1,41 @@
+.smsuc-checkout-messages{
+	@include fill-parent;
+    @include outer-container;
+	background-color: #fcfcfc;
+    margin-bottom: em(80px);
+	.success{
+		@include flash(#e6efc2);
+		border: 1px solid darken(#e6efc2, 20);
+		@include border-top-radius(2px);
+		@include border-bottom-radius(2px);
+		@include border-left-radius(2px);
+		@include border-right-radius(2px);
+	} //end .success
+	.error{
+		@include flash(#fbe3e4);
+		border: 1px solid darken(#fbe3e4, 10);
+		@include border-top-radius(2px);
+		@include border-bottom-radius(2px);
+		@include border-left-radius(2px);
+		@include border-right-radius(2px);
+
+	} //end .error
+	.notice{
+		@include flash(#fff6bf);
+		border: 1px solid darken(#fff6bf, 40);
+		@include border-top-radius(2px);
+		@include border-bottom-radius(2px);
+		@include border-left-radius(2px);
+		@include border-right-radius(2px);
+
+	} //end .notice
+	.alert{
+		@include flash(#fff6bf);
+		border: 1px solid darken(#fff6bf, 40);
+		@include border-top-radius(2px);
+		@include border-bottom-radius(2px);
+		@include border-left-radius(2px);
+		@include border-right-radius(2px);
+
+	} //end .alert
+} //end .checkoutMessages

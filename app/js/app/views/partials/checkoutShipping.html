@@ -1,42 +1,47 @@
-<h4>Look at me! I'm an include called checkoutShipping.html</h4>
 <div class="checkoutShippingContainer">
     <h3>{{message}}</h3>
     <form novalidate method="POST">
         <div class="emailFields">
-            <p>This is the email that will be used</p>
-            Email: <input type="email" data-ng-model="email.email"><br>
-            Email Confirm: <input type="email" data-ng-model="email.confirm">
+            <p>Your email address will be used to send you a confimation of your purchase.</p>
+            <label for="email"> Email: <input type="email" placeholder="youremail@address.com" data-ng-model="email.email" autofocus><br>
+            <!-- THIS FILED SHOUN'T BE NEEDED, BUT SHOULD BE KEPT IN CASE SOMEONE WANTS TO USE IT
+            Email Confirm: <input type="email" data-ng-model="email.confirm"> -->
         </div>
         <div class="billingFields">
-            <p>This is the billing address that will be used</p>
-            First Name: <input type="text" data-ng-model="billing.fname" /><br>
-            Last Name: <input type="text" data-ng-model="billing.lname" /><br>
-            Address 1: <input type="text" data-ng-model="billing.address1" /><br>
-            Address 2: <input type="text" data-ng-model="billing.address2" /><br>
-            City: <input type="text" data-ng-model="billing.city" /><br>
-            State: <input type="text" data-ng-model="billing.state" /><br>
-            Postal Code: <input type="text" data-ng-model="billing.postal" /><br>
-            Phone: <input type="text" data-ng-model="billing.phone" /><br>
+            <h3>Billing Address</h3>
+            <label for="billingFirstName">First Name <input type="text" placeholder="First Name" id="billingFirstName" data-ng-model="billing.fname" required></label><br>
+            <label for="billingLastName">Last Name <input type="text" placeholder="Last Name" id="billingLastName" data-ng-model="billing.lname" required></label><br>
+            <label for="billingAddress1">Address <input type="text" placeholder="Billing Address" id="billingAddress1" data-ng-model="billing.address1" required></label><br>
+            <label for="billingAddress2">Apartment/Suite <input type="text" placeholder="Apartment/Suite" id="billingAddress2" data-ng-model="billing.address2" required></label><br>
+            <label for="billingCity">City <input type="text" placeholder="City" id="billingCity" data-ng-model="billing.city" required></label><br>
+            <label for="billingState">State <input type="text" placeholder="State" id=="billingState" data-ng-model="billing.state" required></label><br>
+            <label for="billingCountry">Country <input type="text" placeholder="State" id=="billingCountry" data-ng-model="billing.country" required></label><br>
+            <label for="billingPostalCode">Postal Code <input type="text" placeholder="Postal Code" id="billingPostalCode" data-ng-model="billing.postal" required></label><br>
+            <label for="billingPhone">Phone <input type="tel" placeholder="000-000-0000" id="billingPhone"  data-ng-model="billing.phone" required></label><br>
+            <label for="billing">Shipping is same as billing <input type="checkbox" data-ng-click="sameAddress(billing)">
         </div>
-        Shipping is same as billing <input type="checkbox" data-ng-click="sameAddress(billing)">
+        
         <div class="shippingFields">
-            <p>This is the shipping address form</p>
-            First Name: <input type="text" data-ng-model="shipping.fname" /><br>
-            Last Name: <input type="text" data-ng-model="shipping.lname" /><br>
-            Address 1: <input type="text" data-ng-model="shipping.address1" /><br>
-            Address 2: <input type="text" data-ng-model="shipping.address2" /><br>
-            City: <input type="text" data-ng-model="shipping.city" /><br>
-            State: <input type="text" data-ng-model="shipping.state" /><br>
-            Postal Code: <input type="text" data-ng-model="shipping.postal" /><br>
-            Phone: <input type="text" data-ng-model="shipping.phone" /><br>
+           <h3>Shipping Address</h3>
+            <label for="shippingFirstName">First Name <input type="text" placeholder="First Name" id="shippingFirstName" data-ng-model="shipping.fname" required></label><br>
+            <label for="shippingLastName">Last Name <input type="text" placeholder="Last Name" id="shippingLastName" data-ng-model="shipping.lname" required></label><br>
+            <label for="shippingAddress1">Address <input type="text" placeholder="Shipping Address" id="shippingAddress1" data-ng-model="shipping.address1" required></label><br>
+            <label for="shippingAddress2">Apartment/Suite <input type="text" placeholder="Apartment/Suite" id="shippingAddress2" data-ng-model="shipping.address2" required></label><br>
+            <label for="shippingCity">City <input type="text" placeholder="City" id="shippingCity" data-ng-model="shipping.city" required></label><br>
+            <label for="shippingState">State <input type="text" placeholder="State" id="shippingState" data-ng-model="shipping.state" required></label><br>
+            <label for="shippingCountry">Country <input type="text" placeholder="State" id="shippingCountry" data-ng-model="shipping.country" required></label><br>
+            <label for="shippingPostalCode">Postal Code <input type="text" placeholder="Postal Code" id="shippingPostalCode" data-ng-model="shipping.postal" required></label><br>
+            <label for="shippingPhone">Phone <input type="tel" placeholder="000-000-0000" id="shippingPhone" data-ng-model="shipping.phone" required></label><br>
         </div>
+        <!-- WHAT ARE THESE FIELDS USED FOR?
+
         Shipping Method: <input type="text" data-ng-model="billing.shippingMethod" /><br>
         Payment Method: <input type="text" value="Credit Card" data-ng-model="billing.paymentMethod" /><br>
-        <button data-ng-click="saveBilling(billing, shipping, email)">Save</button>
+        <button data-ng-click="saveBilling(billing, shipping, email)">Save</button> -->
     </form>
-    <p>This is the billing address that will be used</p>
-    <pre>{{billingInfo | json}}</pre>
+    
 
 
 </div>
 <!-- end .checkoutItemsContainer -->
+<pre>This is the billing address that will be used<br>{{billingInfo | json}}</pre>

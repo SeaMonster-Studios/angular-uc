@@ -19,8 +19,8 @@
 var merchant = require("./dbAlt.js");
 var merchantId = merchant.ID;
 var i_am_using_a_proxy = true;
-var pathToProxy = "http://localhost:8888/restUCTest/rest_proxy.php"; // Or what ever the path to your installation of the rest_proxy.php is.
-var pathToCatalogUrl = "https://secure.ultracart.com/catalog/"+ merchantId + "/"
+var pathToProxy = "http://localhost:8888/rest_proxy.php"; // Or what ever the path to your installation of the rest_proxy.php is.
+var pathToCatalogUrl = "https://secure.ultracart.com/catalog/"+ merchantId + "/";
 
 var fullPathCart = i_am_using_a_proxy ? pathToProxy + "?_url=/rest/cart/" : "/rest/cart/";
 var fullPathItem = i_am_using_a_proxy ? pathToProxy + "?_url=/rest/site/items/" : "/rest/site/items/";
@@ -41,13 +41,14 @@ module.exports = {
 
 
 //"&_mid=" + merchantId +
+
 },{"./dbAlt.js":2}],2:[function(require,module,exports){
 "use strict";
 
 var merchantId = "SEAM";
 
 module.exports = {
-    ID : merchantId
+	ID : merchantId
 }
 },{}],3:[function(require,module,exports){
 /*
@@ -23854,17 +23855,20 @@ module.exports = function(app) {
 
     app.controller("CatalogController", function($scope, $http, $location) {
         $http({
-            url: catalogUrl,
+            url: catalogUrl + '&_mid=SEAM',
             method: "GET",
             dataType: "json",
             cache: false,
-            params: {_mid: merchantId}
+            //params: {_mid: merchantId}
         })
         .success(function(data, status, headers, config) {
             $scope.catalogDisplay = data;
         })
         .error(function(data, status, headers, config) {
             console.log("There was an error: " + data);
+            console.log("There was an error: " + status);
+            console.log("There was an error: " + headers);
+            console.log("There was an error: " + config);
         });// end $http.get
 
     $scope.showDetails = function(id) {
