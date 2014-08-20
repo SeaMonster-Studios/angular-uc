@@ -2,7 +2,7 @@
     <h1>Catalog</h1>
     <ul>
         <li class="single-item four-col" data-ng-repeat="item in catalogDisplay | limitTo:quantity" data-ng-click="showDetails(item.itemId)">
-            <img class="defaultImage" src="{{item.defaultImageUrl}}" alt="" />
+            <img class="defaultImage" data-ng-src="{{item.defaultImageUrl}}" alt="" />
             <p class="description">{{item.description}}</p>
             <p class="cost">{{item.cost}}</p>
             <button class="readMore">Read More</button>

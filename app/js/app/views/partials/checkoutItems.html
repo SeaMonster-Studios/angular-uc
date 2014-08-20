@@ -14,7 +14,7 @@
 		<thead>
 		<tbody>
 			<tr data-ng-repeat="item in loadCart.items">
-				<td class="cart-column image"><img class="defaultImage" src="{{item.defaultImageUrl}}" alt="" /></td>
+				<td class="cart-column image"><img class="defaultImage" data-ng-src="{{item.defaultImageUrl}}" alt="" /></td>
 				<td class="cart-column description">{{item.description}}<br><a class="removeItem" data-ng-click="removeItem(item.position)">Remove Item</a></td>
 				<td class="cart-column price">{{item.unitCost}}</td>
 				<td class="cart-column quantity">{{item.quantity}}</td>

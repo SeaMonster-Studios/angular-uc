@@ -53,10 +53,10 @@ module.exports = function(app) {
             myCart.shipToPhone      = $scope.shippingInfo.phone;
 
             myCart.email            = $scope.emailInfo.email;
-            myCart.email            = $scope.emailInfo.confirm;
+            //myCart.email            = $scope.emailInfo.confirm;
 
-            myCart.shippingMethod   = $scope.billingInfo.shippingMethod;
-            myCart.paymentMethod    = $scope.billingInfo.paymentMethod;
+            myCart.shippingMethod   = "UPS: Ground";
+            myCart.paymentMethod    = "Credit Card";
 
             myCart.shipToCountry    = "United States";
             myCart.billToCountry    = "United States";

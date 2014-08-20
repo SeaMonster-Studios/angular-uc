@@ -4,8 +4,8 @@
         <div class="emailFields">
             <p>Your email address will be used to send you a confimation of your purchase.</p>
             <label for="email"> Email: <input type="email" placeholder="youremail@address.com" data-ng-model="email.email" autofocus><br>
-            <!-- THIS FILED SHOUN'T BE NEEDED, BUT SHOULD BE KEPT IN CASE SOMEONE WANTS TO USE IT
-            Email Confirm: <input type="email" data-ng-model="email.confirm"> -->
+            <!-- THIS FILED SHOUN'T BE NEEDED, BUT SHOULD BE KEPT IN CASE SOMEONE WANTS TO USE IT -->
+            <!-- Email Confirm: <input type="email" data-ng-model="email.confirm"> -->
         </div>
         <div class="billingFields">
             <h3>Billing Address</h3>
@@ -20,7 +20,7 @@
             <label for="billingPhone">Phone <input type="tel" placeholder="000-000-0000" id="billingPhone"  data-ng-model="billing.phone" required></label><br>
             <label for="billing">Shipping is same as billing <input type="checkbox" data-ng-click="sameAddress(billing)">
         </div>
-        
+
         <div class="shippingFields">
            <h3>Shipping Address</h3>
             <label for="shippingFirstName">First Name <input type="text" placeholder="First Name" id="shippingFirstName" data-ng-model="shipping.fname" required></label><br>
@@ -33,13 +33,13 @@
             <label for="shippingPostalCode">Postal Code <input type="text" placeholder="Postal Code" id="shippingPostalCode" data-ng-model="shipping.postal" required></label><br>
             <label for="shippingPhone">Phone <input type="tel" placeholder="000-000-0000" id="shippingPhone" data-ng-model="shipping.phone" required></label><br>
         </div>
-        <!-- WHAT ARE THESE FIELDS USED FOR?
+        <!-- WHAT ARE THESE FIELDS USED FOR?-->
 
-        Shipping Method: <input type="text" data-ng-model="billing.shippingMethod" /><br>
-        Payment Method: <input type="text" value="Credit Card" data-ng-model="billing.paymentMethod" /><br>
-        <button data-ng-click="saveBilling(billing, shipping, email)">Save</button> -->
+        <!-- Shipping Method: <input type="text" placeholder="UPS: Ground" data-ng-model="billing.shippingMethod" /><br>
+        Payment Method: <input type="text" placeholder="Credit Card" data-ng-model="billing.paymentMethod" /><br> -->
+        <button data-ng-click="saveBilling(billing, shipping, email)">Save</button>
     </form>
-    
+
 
 
 </div>
