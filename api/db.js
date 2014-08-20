@@ -18,7 +18,7 @@
 var merchant = require("./dbAlt.js");
 var merchantId = merchant.ID;
 var i_am_using_a_proxy = true;
-var pathToProxy = "http://localhost:8888/rest_proxy.php"; // Or what ever the path to your installation of the rest_proxy.php is.
+var pathToProxy = "http://localhost:8888/restUCTest/rest_proxy.php"; // Or what ever the path to your installation of the rest_proxy.php is.
 var pathToCatalogUrl = "https://secure.ultracart.com/catalog/"+ merchantId + "/";
 
 var fullPathCart = i_am_using_a_proxy ? pathToProxy + "?_url=/rest/cart/" : "/rest/cart/";
