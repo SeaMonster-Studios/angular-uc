@@ -1,14 +1,32 @@
-<section>
-<h2>This is the checkout.html view</h2>
+<section class="smsuc-checkout">
+<h1>Checkout</h1>
 
     <div data-ng-controller="CheckoutSubmitController">
-        <div data-ng-controller="CheckoutItemsController" data-ng-include src="'./views/partials/checkoutItems.html'">
+        <!-- 
+        <div class="smsuc-checkout-messages" data-ng-controller="CheckoutItemsController" data-ng-include src="'./views/partials/checkoutItems.html'">
+
+        </div>-->
+        <div class="smsuc-checkout-messages">
+            <div class="success">
+                <span>This is a success message <a href="#">with a link</a></span>
+            </div>
+            <div class="error">
+                <span>This is an error message <a href="#">with a link</a></span>
+            </div>
+            <div class="notice">
+                <span>This is an notice message <a href="#">with a link</a></span>
+            </div>
+            <div class="alert">
+                <span>This is an alert message <a href="#">with a link</a></span>
+            </div>
+        </div>
+        <div class="smsuc-checkout-items" data-ng-controller="CheckoutItemsController" data-ng-include src="'./views/partials/checkoutItems.html'">
 
         </div>
-        <div data-ng-controller="CheckoutShippingController" data-ng-include src="'./views/partials/checkoutShipping.html'">
+        <div class="smsuc-checkout-shippingbilling" data-ng-controller="CheckoutShippingController" data-ng-include src="'./views/partials/checkoutShipping.html'">
 
         </div>
-        <div data-ng-controller="CheckoutPaymentController" data-ng-include src="'./views/partials/checkoutPayment.html'">
+        <div class="smsuc-checkout-payment" data-ng-controller="CheckoutPaymentController" data-ng-include src="'./views/partials/checkoutPayment.html'">
 
         </div>
         <button data-ng-click="submitOrder()">Submit Order</button>

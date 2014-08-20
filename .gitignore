@@ -4,3 +4,6 @@ app/bower_components
 app/dist/**/*
 setup_env.sh
 api/dbAlt.js
+config.codekit
+sass/config.codekit
+.codekit

@@ -1,8 +1,12 @@
-<section>
-    <h2>This is the catalog.html view</h2>
+<section class="smsuc-catalog">
+    <h1>Catalog</h1>
     <ul>
-        <li data-ng-repeat="item in catalogDisplay | limitTo:quantity" data-ng-click="showDetails(item.itemId)">
-            {{item.description}}
+        <li class="single-item four-col" data-ng-repeat="item in catalogDisplay | limitTo:quantity" data-ng-click="showDetails(item.itemId)">
+            <img class="defaultImage" src="{{item.defaultImageUrl}}" alt="" />
+            <p class="description">{{item.description}}</p>
+            <p class="cost">{{item.cost}}</p>
+            <button class="readMore">Read More</button>
+            <button class="addToCart">Add To Cart</button>
         </li>
     </ul>
 </section>
