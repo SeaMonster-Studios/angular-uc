@@ -28,20 +28,10 @@ module.exports = function(grunt) {
                     {
                         expand: true,
                         cwd: "app/",
-                        src: ["css/**/*.css", "*.html", "img/**/*.svg", "!Gruntfile.js", "fonts/**/*", "bower_components/bootstrap/dist/css/bootstrap.css"],
+                        src: ["css/**/*.css", "*.html", "img/**/*.svg", "!Gruntfile.js"],
                         dest: "app/dist/",
                         flatten: false,
                         filter: "isFile"
-                    },
-                    {
-
-                        expand  : true,
-                        cwd     : "app/",
-                        src     : ["css/**/*.css", "*.html", "img/**/*.svg", "!Gruntfile.js", "fonts/**/*"],
-                        dest    : "app/dist/",
-                        flatten : false,
-                        filter  : "isFile"
-
                     },
                     {
                         expand  : true,
@@ -56,6 +46,14 @@ module.exports = function(grunt) {
                         cwd     : "tests/",
                         src     : ["js/**/*.js", "**/*.html", "mocha/**/*.js", "mocha/**/*.css", "chai/**/*.js"],
                         dest    : "app/dist/tests",
+                        flatten : false,
+                        filter  : "isFile"
+                    },
+                    {
+                        expand  : true,
+                        cwd     : "sass/",
+                        src     : ["fonts/**"],
+                        dest    : "app/dist",
                         flatten : false,
                         filter  : "isFile"
                     }
