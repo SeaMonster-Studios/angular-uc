@@ -48,7 +48,7 @@ module.exports = {
 var merchantId = "SEAM";
 
 module.exports = {
-	ID : merchantId
+    ID : merchantId
 }
 },{}],3:[function(require,module,exports){
 /*
