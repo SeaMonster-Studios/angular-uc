@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generator: Avocode 0.4.0 - http://avocode.com -->
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="54" height="38" view-box="0 0 54 38">
+    <desc>Created with Avocode</desc>
+    <path d="M 3.07 0 C 1.38 0, 0 1.41, 0 3.15 L 0 34.87 C 0 36.6, 1.38 38.01, 3.07 38.01 L 50.92 38.01 C 52.62 38.01, 54 36.6, 54 34.87 L 54 3.15 C 54 1.41, 52.62 0, 50.92 0 L 3.07 0 Z" fill="#4bb9e9" />
+    <text x="9" y="24" fill="#ffffff" font-family="Open Sans" font-size="12" font-weight="700">
+        <tspan>AMEX</tspan>
+    </text>
+    <path d="M 3.07 38.01 L 54.03 3.15 C 54.03 1.41, 52.65 0, 50.95 0 L 3.07 0 C 1.38 0, 0 1.41, 0 3.15 L 0 34.87 C 0 36.6, 1.38 38.01, 3.07 38.01 Z" opacity="0.1" fill="#ffffff" />
+</svg>

@@ -100,6 +100,14 @@ module.exports = function(app) {
         console.log(creditCard);
         $scope.creditCard = creditCard;
 
+        $scope.visa = function(val) {
+            var num = val || 0;
+            var firstNum = num.charAt(0);
+            if(firstNum == 4) {
+                return true;
+            };
+        }
+
         // CheckoutSubmitController.js and CheckoutShippingContoller.js hybrid
         $scope.submitOrder = function(billing, shipping, email, cc) {
             $scope.shippingInfo                 = angular.copy(shipping);

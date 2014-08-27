@@ -1,15 +1,27 @@
 <div class="checkoutPaymentContainer">
     <h4>{{message}}</h4>
     <label for="creditCardNumber">Credit Card Number
-        <input type="number" name="" value="" placeholder="4444333322221111" id="creditCardNumber" data-ng-model="$parent.cc.number">
+        <input
+            type="number"
+            name="$parent.cc.number"
+            value=""
+            placeholder="4444333322221111"
+            id="creditCardNumber"
+            data-ng-model="$parent.cc.number"
+            data-ng-pattern="/^[0-9]$/"
+            required>
     </label><br>
     <label for="creditCardType">Credit Card Type
-        <select
+        <!-- <select
             class="creditCardType"
             id="creditCardType"
             data-ng-options="card for card in creditCard.type"
             data-ng-model="$parent.cc.type">
-        </select>
+        </select> -->
+        <img data-ng-src="./img/amex.svg" alt="" data-ng-show="UCForm.$parent.cc.number.$error.pattern == 3">
+        <img data-ng-src="./img/disc.svg" alt="" data-ng-show="UCForm.$parent.cc.number.$error.pattern == 6">
+        <img data-ng-src="./img/mc.svg" alt="" data-ng-show="UCForm.$parent.cc.number.$error.pattern == 5">
+        <img data-ng-src="./img/visa.svg" alt="" data-ng-show="UCForm.$parent.cc.number.$error.pattern == 4">
     </label><br>
     <label for="creditCardExp">Expiration Date
         <select

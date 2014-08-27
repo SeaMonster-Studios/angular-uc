@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generator: Avocode 0.4.0 - http://avocode.com -->
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="54" height="38" view-box="0 0 54 38">
+    <desc>Created with Avocode</desc>
+    <path d="M 3.07 0 C 1.38 0, 0 1.41, 0 3.15 L 0 34.87 C 0 36.6, 1.38 38.01, 3.07 38.01 L 50.92 38.01 C 52.62 38.01, 54 36.6, 54 34.87 L 54 3.15 C 54 1.41, 52.62 0, 50.92 0 L 3.07 0 Z" fill="#f38121" />
+    <g fill="#ffedd9">
+        <path d="M -4.93 -8 C -6.62 -8, -8 -6.59, -8 -4.85 L -8 34.87 C -8 36.6, -6.62 38.01, -4.93 38.01 L 58.95 38.01 C 60.65 38.01, 62.03 36.6, 62.03 34.87 L 62.03 -4.85 C 62.03 -6.59, 60.65 -8, 58.95 -8 L -4.93 -8 Z" />
+        <path d="M -2.94 41.13 L 5.81 80.17 L 119 54.8 C 119 54.8, 126.93 -41.63, 98.03 -8.03 C 69.14 25.57, -2.94 41.13, -2.94 41.13 Z" />
+    </g>
+    <text x="12" y="20" font-family="Open Sans" font-size="6" font-weight="700">
+        <tspan fill="#000000">DISC</tspan>
+        <tspan fill="#f38121">O</tspan>
+        <tspan fill="#000000">VER</tspan>
+    </text>
+    <path d="M 3.07 38.01 L 54.03 3.15 C 54.03 1.41, 52.65 0, 50.95 0 L 3.07 0 C 1.38 0, 0 1.41, 0 3.15 L 0 34.87 C 0 36.6, 1.38 38.01, 3.07 38.01 Z" opacity="0.1" fill="#ffffff" />
+</svg>
