@@ -16,17 +16,17 @@
                 <span>This is an alert message <a href="#">with a link</a></span>
             </div>
         </div>
-        <div class="smsuc-checkout-items" data-ng-controller="CheckoutItemsController" data-ng-include src="'./views/partials/checkoutItems.html'">
+        <form novalidate method="POST">
+            <div class="smsuc-checkout-items" data-ng-include src="'./views/partials/checkoutItems.html'">
 
-        </div>
-        <div class="smsuc-checkout-shippingbilling" data-ng-controller="CheckoutShippingController" data-ng-include src="'./views/partials/checkoutShipping.html'">
+            </div>
+            <div class="smsuc-checkout-shippingbilling" data-ng-include src="'./views/partials/checkoutShipping.html'">
 
-        </div>
-        <div class="smsuc-checkout-payment" data-ng-controller="CheckoutPaymentController" data-ng-include src="'./views/partials/checkoutPayment.html'">
+            </div>
+            <div class="smsuc-checkout-payment" data-ng-include src="'./views/partials/checkoutPayment.html'">
 
-        </div>
-        <button data-ng-click="submitOrder()">Submit Order</button>
-        <button data-ng-click="test()">test Order</button>
-        <button data-ng-click="get()">Get Shipping</button>
+            </div>
+            <button data-ng-click="submitOrder(billing, shipping, email, cc)">Submit Order</button>
+        </form>
     </div>
 </section>
