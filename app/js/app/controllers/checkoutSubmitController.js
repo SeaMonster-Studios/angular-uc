@@ -7,14 +7,6 @@ var checkoutUrl = baseUrl.checkoutUrl;
 
 module.exports = function(app) {
     app.controller("CheckoutSubmitController", function($scope, $http, $location, $q, ipCookie, CreateCart, LoadCart) {
-        $scope.getCart = "";
-
-        $scope.get = function() {
-            $scope.$broadcast('cartEvent');
-            console.log("this worked?");
-            return $scope.getCart;
-        }
-
 
         $scope.submitOrder = function() {
             var checkoutRequest = {
@@ -44,5 +36,6 @@ module.exports = function(app) {
         $scope.test = function() {
             console.log($scope.message);
         }
+
     });// end app.controller("CheckoutSubmitController")
 };// end module.exports

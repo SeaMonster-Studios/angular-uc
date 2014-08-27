@@ -30,7 +30,7 @@ module.exports = function(app) {
             }
         },
 
-        $scope.saveBilling = function() {
+        $scope.saveBilling = function(billing, shipping, email) {
             console.log("inside the save()");
             $scope.billingInfo      = angular.copy(billing);
             $scope.shippingInfo     = angular.copy(shipping);
@@ -81,21 +81,7 @@ module.exports = function(app) {
                 console.log("there was an error with saveBilling: " + cart);
             }); // end $http(post)
             return cart;
-        },// end $scope.saveBilling()
-
-        $scope.talk = function() {
-            console.log(ted);
-            return ted;
-        },
-
-        $scope.updateTest = function(billingfname) {
-            console.log("inside of updateTest");
-            myCart.billToFirstName = billingfname;
-        }
-
-        $scope.$on('cartEvent', function(e) {
-            $scope.$parent.getCart = ($scope.talk())
-        });
+        }// end $scope.saveBilling()
 
         return cart;
     });// end app.controller("CheckoutShippingController")
