@@ -1,14 +1,15 @@
 <div class="checkoutPaymentContainer">
+<form name="fooballs" novalidate>
     <h4>{{message}}</h4>
     <label for="creditCardNumber">Credit Card Number
         <input
             type="number"
-            name="$parent.cc.number"
+            name="creditCardForm"
             value=""
             placeholder="4444333322221111"
             id="creditCardNumber"
             data-ng-model="$parent.cc.number"
-            data-ng-pattern="/^[0-9]$/"
+            data-ng-pattern="/^[0-9]+$/"
             required>
     </label><br>
     <label for="creditCardType">Credit Card Type
@@ -18,10 +19,10 @@
             data-ng-options="card for card in creditCard.type"
             data-ng-model="$parent.cc.type">
         </select> -->
-        <img data-ng-src="./img/amex.svg" alt="" data-ng-show="UCForm.$parent.cc.number.$error.pattern == 3">
-        <img data-ng-src="./img/disc.svg" alt="" data-ng-show="UCForm.$parent.cc.number.$error.pattern == 6">
-        <img data-ng-src="./img/mc.svg" alt="" data-ng-show="UCForm.$parent.cc.number.$error.pattern == 5">
-        <img data-ng-src="./img/visa.svg" alt="" data-ng-show="UCForm.$parent.cc.number.$error.pattern == 4">
+        <img data-ng-src="./img/amex.svg" alt="" data-ng-show="form.creditCardForm.$error.pattern && form.creditCardForm.$dirty.pattern">
+        <img data-ng-src="./img/disc.svg" alt="" data-ng-hide="fooballs.creditCardForm.$valid.pattern == 6">
+        <img data-ng-src="./img/mc.svg" alt="" data-ng-hide="fooballs.creditCardForm.$valid.pattern == 5">
+        <img data-ng-src="./img/visa.svg" alt="" data-ng-hide="fooballs.$creditCardForm.$valid.pattern == 4">
     </label><br>
     <label for="creditCardExp">Expiration Date
         <select
@@ -40,4 +41,5 @@
         <input type="number" name="" value="" placeholder="000" id="creditCardCVV" data-ng-model="$parent.cc.csv">
     </label><br>
     <!-- <button data-ng-click="saveCC(cc)">Submit CC data</button> -->
+    </form>
 </div>

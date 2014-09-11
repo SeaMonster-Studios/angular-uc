@@ -74,7 +74,7 @@ module.exports = function(app) {
         }
 
         // CheckoutPaymentController.js
-
+        $scope.digits = {};
         $scope.ccInfo = {};
         var creditCard = {
             type   : ['AMEX', 'MasterCard', 'Visa'],
